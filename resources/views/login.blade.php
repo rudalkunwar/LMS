@@ -2,10 +2,10 @@
 
 <div class="font-sans">
     <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
-        <div class="grid md:grid-cols-2 items-center gap-6 max-w-6xl w-full">
+        <div class="flex justify-center items-center gap-6 max-w-6xl w-full">
             <!-- Form Section -->
-            <div class="border border-gray-300 rounded-lg p-6 shadow-lg">
-                <form class="space-y-6" method="POST" action="">
+            <div class="border border-gray-300 rounded-lg p-6 shadow-lg w-1/2">
+                <form class="space-y-6" method="POST" action="/login">
                     @csrf <!-- Assuming you are using Laravel's CSRF protection -->
 
                     <!-- Heading -->
@@ -13,13 +13,19 @@
                         <h3 class="text-gray-800 text-3xl font-extrabold">Sign in</h3>
                     </div>
 
-                    <!-- Username Input -->
+                    <!-- Heading -->
+                    @error('email')
+                        <div class="mb-6 px-2">
+                            <h3 class="text-red-600">{{ $message }}</h3>
+                        </div>
+                    @enderror
+                    <!-- email Input -->
                     <div>
-                        <label for="username" class="text-gray-800 text-sm mb-2 block">Username</label>
+                        <label for="email" class="text-gray-800 text-sm mb-2 block">Email</label>
                         <div class="relative flex items-center">
-                            <input id="username" name="username" type="text" required
+                            <input id="email" name="email" type="email" required
                                 class="w-full text-sm text-gray-800 border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:border-blue-600"
-                                placeholder="Enter username" />
+                                placeholder="Enter email" />
                             <i class="ri-user-line absolute right-4 text-gray-400"></i>
                         </div>
                     </div>
