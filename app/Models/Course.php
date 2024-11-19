@@ -16,6 +16,8 @@ class Course extends Model
         'image',
         'instructor_id',
     ];
-
-
+    public function instructor()
+    {
+        return $this->belongsTo(Instructor::class);
+    }
 }

@@ -26,7 +26,7 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'required|string|max:255|unique:courses,title',
             'lecture_hours' => 'required|integer',
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',

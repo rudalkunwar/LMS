@@ -17,7 +17,7 @@
                         <th class="px-6 py-3">SN</th>
                         <th class="px-6 py-3">Course Name</th>
                         <th class="px-6 py-3">Description</th>
-                        <th class="px-6 py-3">Department</th>
+                        <th class="px-6 py-3">Instructor</th>
                         <th class="px-6 py-3">Actions</th>
                     </tr>
                 </thead>
@@ -28,9 +28,10 @@
                     @forelse($courses as $course)
                         <tr class="border-b">
                             <td class="px-6 py-4">{{ $i++ }}</td>
-                            <td class="px-6 py-4">{{ $course->name }}</td>
+                            <td class="px-6 py-4">{{ $course->title }}</td>
                             <td class="px-6 py-4">{{ $course->description }}</td>
-                            <td class="px-6 py-4">{{ $course->department }}</td>
+                            <td class="px-6 py-4">
+                                {{ $course->instructor->first_name . ' ' . $course->instructor->last_name }}</td>
                             <td class="px-6 py-4 flex space-x-2">
                                 <a href="{{ route('courses.edit', $course->id) }}"
                                     class="bg-blue-500 px-4 py-2 rounded-lg text-white shadow-lg hover:bg-blue-700 transition-colors duration-300">

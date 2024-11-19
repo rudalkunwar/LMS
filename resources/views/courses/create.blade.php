@@ -53,10 +53,11 @@
                         class="w-full px-4 py-2 border @error('instructor_id') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                         required>
                         <option disabled selected value="">Choose Instructor</option>
+                  
                         @foreach ($instructors as $instructor)
                             <option value="{{ $instructor->id }}"
                                 {{ old('instructor_id') == $instructor->id ? 'selected' : '' }}>
-                                {{ $instructor->name }}
+                                {{ $instructor->first_name ." ". $instructor->last_name  }}
                             </option>
                         @endforeach
                     </select>

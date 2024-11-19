@@ -16,4 +16,8 @@ class Instructor extends Model
         'phone_number',
         'department',
     ];
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }
