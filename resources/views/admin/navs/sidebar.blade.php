@@ -12,22 +12,95 @@
 
         <!-- Navigation -->
         <nav class="flex-1 overflow-y-auto custom-scrollbar">
-            <ul class="p-4 space-y-2">
+            <ul class="p-4 space-y-6">
+                <!-- Dashboard Section -->
                 <li>
                     <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/role') ? 'active' : '' }}">
-                        <i class="fas fa-th-large w-5"></i>
-                        <span class="text-md"> {{ __('Roles') }}</span>
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/dashboard') ? 'active' : '' }}">
+                        <i class="ri-dashboard-line w-5"></i>
+                        <span class="text-md">Dashboard</span>
                     </a>
                 </li>
+
+                <!-- College Management Section -->
+                <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">College Management</li>
+
+                <!-- Instructors -->
                 <li>
                     <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/users') ? 'active' : '' }}">
-                        <i class="fa-regular fa-user w-5"></i>
-                        <span class="text-md"> {{ __('Users') }}</span>
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/instructors') ? 'active' : '' }}">
+                        <i class="ri-user-star-line w-5"></i>
+                        <span class="text-md">Instructors</span>
+                    </a>
+                </li>
+
+                <!-- Students -->
+                <li>
+                    <a href=""
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/students') ? 'active' : '' }}">
+                        <i class="ri-user-line w-5"></i>
+                        <span class="text-md">Students</span>
+                    </a>
+                </li>
+
+                <!-- Courses -->
+                <li>
+                    <a href=""
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/courses') ? 'active' : '' }}">
+                        <i class="ri-book-line w-5"></i>
+                        <span class="text-md">Courses</span>
+                    </a>
+                </li>
+
+                <!-- Assignments -->
+                <li>
+                    <a href=""
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/assignments') ? 'active' : '' }}">
+                        <i class="ri-file-list-line w-5"></i>
+                        <span class="text-md">Assignments</span>
+                    </a>
+                </li>
+
+                <!-- Grades -->
+                <li>
+                    <a href=""
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/grades') ? 'active' : '' }}">
+                        <i class="ri-bar-chart-box-line w-5"></i>
+                        <span class="text-md">Grades</span>
+                    </a>
+                </li>
+
+                <!-- System Management Section -->
+                <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">System Management</li>
+
+                <!-- Admin Roles -->
+                <li>
+                    <a href=""
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/roles') ? 'active' : '' }}">
+                        <i class="ri-lock-line w-5"></i>
+                        <span class="text-md">Roles & Permissions</span>
+                    </a>
+                </li>
+
+                <!-- Settings -->
+                <li>
+                    <a href=""
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/settings') ? 'active' : '' }}">
+                        <i class="ri-settings-3-line w-5"></i>
+                        <span class="text-md">System Settings</span>
+                    </a>
+                </li>
+
+                <!-- Reports -->
+                <li>
+                    <a href=""
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/reports') ? 'active' : '' }}">
+                        <i class="ri-bar-chart-line w-5"></i>
+                        <span class="text-md">Reports</span>
                     </a>
                 </li>
             </ul>
+
         </nav>
         <!-- Logout Section -->
         <div class="p-4 border-t border-gray-700">
@@ -51,19 +124,80 @@
             <!-- Navigation -->
             <nav class="flex-1 overflow-y-auto custom-scrollbar">
                 <ul class="p-4 space-y-2">
-                    <li>
-                        <a href=""
-                            class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/role') ? 'active' : '' }}">
-                            <i class="fas fa-th-large w-5"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href=""
-                            class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/users') ? 'active' : '' }}">
-                            <i class="fa-regular fa-user w-5"></i>
-                        </a>
-                    </li>
-                </ul>
+                    <ul class="p-4 space-y-6">
+                        <!-- Dashboard Section -->
+                        <li>
+                            <a href=""
+                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/dashboard') ? 'active' : '' }}">
+                                <i class="ri-dashboard-line w-5"></i>
+                            </a>
+                        </li>
+
+                        <!-- Instructors -->
+                        <li>
+                            <a href=""
+                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/instructors') ? 'active' : '' }}">
+                                <i class="ri-user-star-line w-5"></i>
+                            </a>
+                        </li>
+
+                        <!-- Students -->
+                        <li>
+                            <a href=""
+                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/students') ? 'active' : '' }}">
+                                <i class="ri-user-line w-5"></i>
+                            </a>
+                        </li>
+
+                        <!-- Courses -->
+                        <li>
+                            <a href=""
+                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/courses') ? 'active' : '' }}">
+                                <i class="ri-book-line w-5"></i>
+                            </a>
+                        </li>
+
+                        <!-- Assignments -->
+                        <li>
+                            <a href=""
+                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/assignments') ? 'active' : '' }}">
+                                <i class="ri-file-list-line w-5"></i>
+                            </a>
+                        </li>
+
+                        <!-- Grades -->
+                        <li>
+                            <a href=""
+                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/grades') ? 'active' : '' }}">
+                                <i class="ri-bar-chart-box-line w-5"></i>
+                            </a>
+                        </li>
+
+                        <!-- Admin Roles -->
+                        <li>
+                            <a href=""
+                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/roles') ? 'active' : '' }}">
+                                <i class="ri-lock-line w-5"></i>
+                            </a>
+                        </li>
+
+                        <!-- Settings -->
+                        <li>
+                            <a href=""
+                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/settings') ? 'active' : '' }}">
+                                <i class="ri-settings-3-line w-5"></i>
+                            </a>
+                        </li>
+
+                        <!-- Reports -->
+                        <li>
+                            <a href=""
+                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/reports') ? 'active' : '' }}">
+                                <i class="ri-bar-chart-line w-5"></i>
+                            </a>
+                        </li>
+                    </ul>
+
             </nav>
             <!-- Logout Section -->
             <div class="p-4 border-t border-gray-700">
