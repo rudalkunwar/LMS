@@ -34,5 +34,5 @@ Route::resource('instructors', InstructorController::class);
 Route::resource('courses', CourseController::class);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
