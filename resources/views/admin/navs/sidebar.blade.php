@@ -112,131 +112,19 @@
         </div>
     </div>
 </aside>
-<aside id="iconSidebar" class="hidden w-20 h-screen bg-gray-900 text-white z-20 ">
-    <div class="flex flex-col h-full">
-        <div class="flex flex-col h-full">
-            <!-- Logo Section -->
-            <div class="p-6 border-b border-gray-700">
-                <div class="flex justify-between items-center">
-                    LH</a>
-                </div>
-            </div>
-            <!-- Navigation -->
-            <nav class="flex-1 overflow-y-auto custom-scrollbar">
-                <ul class="p-4 space-y-2">
-                    <ul class="p-4 space-y-6">
-                        <!-- Dashboard Section -->
-                        <li>
-                            <a href=""
-                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/dashboard') ? 'active' : '' }}">
-                                <i class="ri-dashboard-line w-5"></i>
-                            </a>
-                        </li>
-
-                        <!-- Instructors -->
-                        <li>
-                            <a href=""
-                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/instructors') ? 'active' : '' }}">
-                                <i class="ri-user-star-line w-5"></i>
-                            </a>
-                        </li>
-
-                        <!-- Students -->
-                        <li>
-                            <a href=""
-                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/students') ? 'active' : '' }}">
-                                <i class="ri-user-line w-5"></i>
-                            </a>
-                        </li>
-
-                        <!-- Courses -->
-                        <li>
-                            <a href=""
-                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/courses') ? 'active' : '' }}">
-                                <i class="ri-book-line w-5"></i>
-                            </a>
-                        </li>
-
-                        <!-- Assignments -->
-                        <li>
-                            <a href=""
-                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/assignments') ? 'active' : '' }}">
-                                <i class="ri-file-list-line w-5"></i>
-                            </a>
-                        </li>
-
-                        <!-- Grades -->
-                        <li>
-                            <a href=""
-                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/grades') ? 'active' : '' }}">
-                                <i class="ri-bar-chart-box-line w-5"></i>
-                            </a>
-                        </li>
-
-                        <!-- Admin Roles -->
-                        <li>
-                            <a href=""
-                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/roles') ? 'active' : '' }}">
-                                <i class="ri-lock-line w-5"></i>
-                            </a>
-                        </li>
-
-                        <!-- Settings -->
-                        <li>
-                            <a href=""
-                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/settings') ? 'active' : '' }}">
-                                <i class="ri-settings-3-line w-5"></i>
-                            </a>
-                        </li>
-
-                        <!-- Reports -->
-                        <li>
-                            <a href=""
-                                class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/reports') ? 'active' : '' }}">
-                                <i class="ri-bar-chart-line w-5"></i>
-                            </a>
-                        </li>
-                    </ul>
-
-            </nav>
-            <!-- Logout Section -->
-            <div class="p-4 border-t border-gray-700">
-                <p>
-                    &copy;
-                    {{ date('Y') }}
-                </p>
-            </div>
-        </div>
-    </div>
-</aside>
 
 @push('script')
     <script>
         // DOM Elements
         const toggleButton = document.getElementById('toggleSidebar');
-        const toggleMobileButton = document.getElementById('toggleMobileSidebar');
         const closeButton = document.getElementById('closeSidebar');
         const sidebar = document.getElementById('sidebar');
-        const iconSidebar = document.getElementById('iconSidebar');
-
         toggleButton.addEventListener('click', () => {
-
             sidebar.classList.toggle('hidden');
-
-            if (sidebar.classList.contains("hidden")) {
-                iconSidebar.classList.remove('hidden');
-            } else {
-                iconSidebar.classList.add('hidden');
-            }
         });
 
         closeButton.addEventListener('click', () => {
             sidebar.classList.add('hidden');
-            iconSidebar.classList.add('hidden');
         });
-
-        toggleMobileButton.addEventListener('click', () => {
-            sidebar.classList.toggle('hidden');
-        })
     </script>
 @endpush

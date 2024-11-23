@@ -2,11 +2,7 @@
     <div class="flex items-center justify-between px-4 py-3">
         <!-- Left Section -->
         <div class="flex items-center gap-4">
-            <button id="toggleSidebar" class="text-gray-500 hover:text-gray-700 hidden md:flex">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
-
-            <button id="toggleMobileSidebar" class="text-gray-500 hover:text-gray-700 md:hidden">
+            <button id="toggleSidebar" class="text-gray-500 hover:text-gray-700">
                 <i class="fas fa-bars text-xl"></i>
             </button>
 
