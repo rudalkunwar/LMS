@@ -27,6 +27,8 @@ Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logou
 // Resource Routes for Students
 Route::resource('students', StudentController::class);
 
+// Route::get('/students', [StudentController::class, 'index'])->name('admin.students.index');
+
 // Resource Routes for Instructors
 Route::resource('instructors', InstructorController::class);
 

@@ -12,14 +12,14 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::with('course')->get();
-        return view('students.index', compact('students'));
+        return view('admin.students.index', compact('students'));
     }
 
     // Show the form to create a new student
     public function create()
     {
         $courses = Course::all(); // Fetch courses for the dropdown
-        return view('students.create', compact('courses'));
+        return view('admin.students.create', compact('courses'));
     }
 
     // Store a new student in the database
@@ -44,7 +44,7 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         $courses = Course::all(); // Fetch courses for the dropdown
-        return view('students.edit', compact('student', 'courses'));
+        return view('admin.students.edit', compact('student', 'courses'));
     }
 
     // Update an existing student in the database

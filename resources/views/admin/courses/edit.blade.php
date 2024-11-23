@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <div class="pl-8 shadow-md container mx-auto flex justify-between items-center py-4">

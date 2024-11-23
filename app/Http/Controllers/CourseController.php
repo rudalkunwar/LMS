@@ -12,14 +12,14 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
-        return view('courses.index', compact('courses'));
+        return view('admin.courses.index', compact('courses'));
     }
 
     // Show the form to create a new course
     public function create()
     {
         $instructors = Instructor::all(); // Fetch instructors for the dropdown
-        return view('courses.create', compact('instructors'));
+        return view('admin.courses.create', compact('instructors'));
     }
 
     // Store a new course in the database
@@ -48,7 +48,7 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $instructors = Instructor::all(); // Fetch instructors for the dropdown
-        return view('courses.edit', compact('course', 'instructors'));
+        return view('admin.courses.edit', compact('course', 'instructors'));
     }
 
     // Update an existing course in the database

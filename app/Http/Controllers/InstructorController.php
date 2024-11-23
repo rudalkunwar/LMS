@@ -12,7 +12,7 @@ class InstructorController extends Controller
     public function index()
     {
         $instructors = Instructor::all();
-        return view('instructors.index', compact('instructors'));
+        return view('admin.instructors.index', compact('instructors'));
     }
 
     /**
@@ -20,7 +20,7 @@ class InstructorController extends Controller
      */
     public function create()
     {
-        return view('instructors.create');
+        return view('admin.instructors.create');
     }
 
     /**
@@ -46,7 +46,7 @@ class InstructorController extends Controller
      */
     public function show(Instructor $instructor)
     {
-        return view('instructors.show', compact('instructor'));
+        return view('admin.instructors.show', compact('instructor'));
     }
 
     /**
@@ -54,7 +54,7 @@ class InstructorController extends Controller
      */
     public function edit(Instructor $instructor)
     {
-        return view('instructors.edit', compact('instructor'));
+        return view('admin.instructors.edit', compact('instructor'));
     }
 
     /**
