@@ -37,18 +37,9 @@
                             <td class="px-6 py-4">{{ $student->course->title }}</td>
                             <td class="px-6 py-4 flex space-x-2">
                                 <a href="{{ route('students.edit', $student->id) }}"
-                                    class="bg-blue-500 px-4 py-2 rounded-lg text-white shadow-lg hover:bg-blue-700 transition-colors duration-300">
-                                    Edit
+                                    class="text-blue-500 px-4 py-2 hover:text-blue-700 transition-colors duration-300">
+                                    View more
                                 </a>
-                                <form action="{{ route('students.destroy', $student->id) }}" method="POST"
-                                    onsubmit="return confirm('Are you sure you want to delete this student?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="bg-red-500 px-4 py-2 rounded-lg text-white shadow-lg hover:bg-red-700 transition-colors duration-300">
-                                        Delete
-                                    </button>
-                                </form>
                             </td>
                         </tr>
                     @empty

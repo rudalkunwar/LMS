@@ -35,20 +35,10 @@
                             <td class="px-6 py-4">{{ $instructor->email }}</td>
                             <td class="px-6 py-4">{{ $instructor->phone_number }}</td>
                             <td class="px-6 py-4">{{ $instructor->department }}</td>
-                            <td class="px-6 py-4 flex space-x-2">
-                                <a href="{{ route('instructors.edit', $instructor->id) }}"
-                                    class="bg-blue-500 px-4 py-2 rounded-lg text-white shadow-lg hover:bg-blue-700 transition-colors duration-300">
-                                    Edit
+                            <td> <a href="{{ route('instructors.show', $instructor->id) }}"
+                                    class="text-blue-500 px-4 py-2 hover:text-blue-700 transition-colors duration-300">
+                                    View More
                                 </a>
-                                <form action="{{ route('instructors.destroy', $instructor->id) }}" method="POST"
-                                    onsubmit="return confirm('Are you sure you want to delete this instructor?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="bg-red-500 px-4 py-2 rounded-lg text-white shadow-lg hover:bg-red-700 transition-colors duration-300">
-                                        Delete
-                                    </button>
-                                </form>
                             </td>
                         </tr>
                     @empty
