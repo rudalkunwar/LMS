@@ -10,14 +10,36 @@ class Course extends Model
     /** @use HasFactory<\Database\Factories\CourseFactory> */
     use HasFactory;
     protected $fillable = [
+        'code',
         'title',
-        'lecture_hours',
         'description',
-        'image',
         'instructor_id',
+        'thumbnail',
+        'status'
     ];
+
     public function instructor()
     {
-        return $this->belongsTo(Instructor::class);
+        return $this->belongsTo(User::class, 'instructor_id');
+    }
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class)->orderBy('order');
+    }
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }
+
+    public function discussions()
+    {
+        return $this->hasMany(Discussion::class);
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'course_user')->withTimestamps();
     }
 }
