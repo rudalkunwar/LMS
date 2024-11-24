@@ -13,61 +13,68 @@ A modern, feature-rich Learning Management System built with Laravel. This platf
 
 ## Features
 
-- User Management with Multiple Roles (Admin, Instructor, Student)
-- Course Creation and Management
-- Content Management (Lectures, Assignments, Quizzes)
-- Student Progress Tracking
-- Interactive Discussion Forums
-- Automated Grading System
-- File Management for Course Materials
-- Real-time Notifications
-- Performance Analytics and Reporting
-- Mobile-Responsive Design
+-   User Management with Multiple Roles (Admin, Instructor, Student)
+-   Course Creation and Management
+-   Content Management (Lectures, Assignments, Quizzes)
+-   Student Progress Tracking
+-   Interactive Discussion Forums
+-   Automated Grading System
+-   File Management for Course Materials
+-   Real-time Notifications
+-   Performance Analytics and Reporting
+-   Mobile-Responsive Design
 
 ## System Requirements
 
-- PHP >= 8.1
-- Composer
-- MySQL or PostgreSQL
-- Node.js & NPM
-- Laravel CLI
+-   PHP >= 8.1
+-   Composer
+-   MySQL or PostgreSQL
+-   Node.js & NPM
+-   Laravel CLI
 
 ## Installation
 
 1. Clone the repository:
+
 ```bash
-git clone [your-repository-url]
-cd [project-directory]
+git clone https://github.com/rudalkunwar/LMS
+cd LMS
 ```
 
 2. Install PHP dependencies:
+
 ```bash
 composer install
 ```
 
 3. Install and compile frontend dependencies:
+
 ```bash
 npm install
 npm run dev
 ```
 
 4. Configure your environment:
+
 ```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
 5. Set up your database in the .env file and run migrations:
+
 ```bash
 php artisan migrate
 ```
 
 6. Seed the database with initial data:
+
 ```bash
 php artisan db:seed
 ```
 
 7. Start the development server:
+
 ```bash
 php artisan serve
 ```
@@ -76,18 +83,18 @@ php artisan serve
 
 After installation, you can access the system at `http://localhost:8000`. Default login credentials:
 
-- Admin: admin@example.com / password
-- Instructor: instructor@example.com / password
-- Student: student@example.com / password
+-   Admin: admin@example.com / password
+-   Instructor: instructor@example.com / password
+-   Student: student@example.com / password
 
 ## Documentation
 
 Detailed documentation for each feature can be found in the `docs` directory:
 
-- [User Guide](docs/user-guide.md)
-- [Administrator Guide](docs/admin-guide.md)
-- [API Documentation](docs/api-docs.md)
-- [Development Guide](docs/development.md)
+-   [User Guide](docs/user-guide.md)
+-   [Administrator Guide](docs/admin-guide.md)
+-   [API Documentation](docs/api-docs.md)
+-   [Development Guide](docs/development.md)
 
 ## Contributing
 
@@ -105,16 +112,17 @@ This Learning Management System is open-sourced software licensed under the [MIT
 
 This project is built with Laravel, and we extend our thanks to the entire Laravel community and its contributors. Special thanks to:
 
-- Laravel Framework Team
-- All our contributors
-- [List any other major dependencies or contributors]
+-   Laravel Framework Team
+-   All our contributors
+-   [List any other major dependencies or contributors]
 
 ## Support
 
 For support, please:
-- Check our [Documentation](docs/)
-- Create an issue in our issue tracker
-- Contact our support team at [your-support-email]
+
+-   Check our [Documentation](docs/)
+-   Create an issue in our issue tracker
+-   Contact our support team at [your-support-email]
 
 ---
 
