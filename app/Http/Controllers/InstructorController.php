@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Instructor;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 
 class InstructorController extends Controller
 {
@@ -29,11 +31,11 @@ class InstructorController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:instructors,email',
             'phone_number' => 'nullable|string|max:15',
             'department' => 'nullable|string|max:255',
+            'password' => 'required|min:6|confirmed',
         ]);
 
         Instructor::create($validated);
@@ -63,11 +65,12 @@ class InstructorController extends Controller
     public function update(Request $request, Instructor $instructor)
     {
         $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:instructors,email,' . $instructor->id,
             'phone_number' => 'nullable|string|max:15',
             'department' => 'nullable|string|max:255',
+            'password' => 'required|min:6|confirmed',
+
         ]);
 
         $instructor->update($validated);

@@ -9,13 +9,7 @@ class Instructor extends Model
 {
     /** @use HasFactory<\Database\Factories\InstructorFactory> */
     use HasFactory;
-    protected $fillable = [
-        'first_name',
-        'last_name',
-        'email',
-        'phone_number',
-        'department',
-    ];
+    protected $guarded = [];
     public function course()
     {
         return $this->belongsTo(Course::class);

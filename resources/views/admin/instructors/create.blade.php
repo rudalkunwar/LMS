@@ -15,25 +15,13 @@
             @csrf
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-xl font-semibold mb-4">Instructor Details</h2>
-
-                <!-- First Name -->
+                <!--  Name -->
                 <div class="mb-4">
-                    <label for="first_name" class="block text-gray-700 text-sm font-medium mb-2">First Name</label>
-                    <input type="text" id="first_name" name="first_name"
-                        class="w-full px-4 py-2 border @error('first_name') border-red-500  @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        value="{{ old('first_name') }}" required>
-                    @error('first_name')
-                        <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Last Name -->
-                <div class="mb-4">
-                    <label for="last_name" class="block text-gray-700 text-sm font-medium mb-2">Last Name</label>
-                    <input type="text" id="last_name" name="last_name"
-                        class="w-full px-4 py-2 border @error('last_name') border-red-500  @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        value="{{ old('last_name') }}" required>
-                    @error('last_name')
+                    <label for="name" class="block text-gray-700 text-sm font-medium mb-2"> Name</label>
+                    <input type="text" id="name" name="name"
+                        class="w-full px-4 py-2 border @error('name') border-red-500  @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        value="{{ old('name') }}" required>
+                    @error('name')
                         <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
@@ -60,13 +48,20 @@
                     @enderror
                 </div>
 
-                <!-- Department -->
+                <!-- Course -->
                 <div class="mb-4">
-                    <label for="department" class="block text-gray-700 text-sm font-medium mb-2">Department</label>
-                    <input type="text" id="department" name="department"
-                        class="w-full px-4 py-2 border @error('department') border-red-500  @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        value="{{ old('department') }}">
-                    @error('department')
+                    <label for="course_id" class="block text-gray-700 text-sm font-medium mb-2">Assign Course</label>
+                    <select id="course_id" name="course_id"
+                        class="w-full px-4 py-2 border @error('course_id') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        required>
+                        <option value="">Select Course</option>
+                        @foreach ($courses as $course)
+                            <option value="{{ $course->id }}" {{ old('course_id') == $course->id ? 'selected' : '' }}>
+                                {{ $course->title }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('course_id')
                         <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
@@ -84,12 +79,12 @@
 
                 <!-- Confirm Password -->
                 <div class="mb-4">
-                    <label for="confirm_password" class="block text-gray-700 text-sm font-medium mb-2">Confirm
+                    <label for="password_confirmation" class="block text-gray-700 text-sm font-medium mb-2">Confirm
                         password</label>
-                    <input type="password" id="confirm_password" name="confirm_password"
-                        class="w-full px-4 py-2 border @error('confirm_password') border-red-500  @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        value="{{ old('confirm_password') }}">
-                    @error('confirm_password')
+                    <input type="password" id="password_confirmation" name="password_confirmation"
+                        class="w-full px-4 py-2 border @error('password_confirmation') border-red-500  @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        value="{{ old('password_confirmation') }}">
+                    @error('password_confirmation')
                         <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>

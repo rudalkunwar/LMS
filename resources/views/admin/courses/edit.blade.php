@@ -47,24 +47,6 @@
                     @enderror
                 </div>
 
-                <!-- Instructor -->
-                <div class="mb-4">
-                    <label for="instructor_id" class="block text-gray-700 text-sm font-medium mb-2">Instructor</label>
-                    <select id="instructor_id" name="instructor_id"
-                        class="w-full px-4 py-2 border @error('instructor_id') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        required>
-                        @foreach ($instructors as $instructor)
-                            <option value="{{ $instructor->id }}"
-                                {{ old('instructor_id', $course->instructor_id) == $instructor->id ? 'selected' : '' }}>
-                                {{ $instructor->first_name . ' ' . $instructor->last_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('instructor_id')
-                        <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
-                    @enderror
-                </div>
-
 
                 <!-- Course Image -->
                 <div class="mb-4">

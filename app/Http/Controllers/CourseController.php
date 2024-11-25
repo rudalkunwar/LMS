@@ -26,11 +26,11 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'code' => 'required|unique:courses',
             'title' => 'required|string|max:255|unique:courses,title',
             'lecture_hours' => 'required|integer',
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
-            'instructor_id' => 'required|exists:instructors,id',
         ]);
 
         // Handle the image upload if present
@@ -55,11 +55,11 @@ class CourseController extends Controller
     public function update(Request $request, Course $course)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
+            'code' => 'required|unique:courses',
+            'title' => 'required|string|max:255|unique:courses,title',
             'lecture_hours' => 'required|integer',
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
-            'instructor_id' => 'required|exists:instructors,id',
         ]);
 
         // Handle the image upload if present

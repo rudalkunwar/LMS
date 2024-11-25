@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('code')->unique(); // Course code
             $table->string('title');
             $table->text('description');
-            $table->foreignId('instructor_id')->constrained('users');
             $table->string('thumbnail')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
