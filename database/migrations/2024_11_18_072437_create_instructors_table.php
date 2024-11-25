@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('instructors', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name'); // Instructor's first name
-            $table->string('last_name'); // Instructor's last name
+            $table->string('name'); // Instructor's  name
             $table->string('email')->unique(); // Instructor's email (must be unique)
             $table->string('phone_number')->nullable(); // Optional phone number
             $table->string('department')->nullable(); // Optional department name
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade'); // Foreign key to instructors table
+            $table->string('password');
             $table->timestamps();
         });
     }

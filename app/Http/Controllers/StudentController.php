@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 
 class StudentController extends Controller
 {
@@ -33,6 +34,7 @@ class StudentController extends Controller
             'address' => 'nullable|string|max:255',
             'dob' => 'nullable|date',
             'course_id' => 'required|exists:courses,id',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         Student::create($validated);

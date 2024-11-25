@@ -13,6 +13,17 @@
         <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="bg-white p-6 rounded-lg shadow-md">
+                <!-- Course Code -->
+                <div class="mb-4">
+                    <label for="code" class="block text-gray-700 text-sm font-medium mb-2">Course Code</label>
+                    <input type="text" id="code" name="code"
+                        class="w-full px-4 py-2 border @error('code') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        value="{{ old('code') }}" required>
+                    @error('code')
+                        <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Course Title -->
                 <div class="mb-4">
                     <label for="title" class="block text-gray-700 text-sm font-medium mb-2">Course Title</label>
@@ -20,17 +31,6 @@
                         class="w-full px-4 py-2 border @error('title') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                         value="{{ old('title') }}" required>
                     @error('title')
-                        <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Lecture Hours -->
-                <div class="mb-4">
-                    <label for="lecture_hours" class="block text-gray-700 text-sm font-medium mb-2">Lecture Hours</label>
-                    <input type="number" id="lecture_hours" name="lecture_hours"
-                        class="w-full px-4 py-2 border @error('lecture_hours') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        value="{{ old('lecture_hours') }}" required>
-                    @error('lecture_hours')
                         <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
@@ -53,7 +53,6 @@
                         class="w-full px-4 py-2 border @error('instructor_id') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                         required>
                         <option disabled selected value="">Choose Instructor</option>
-                  
                         @foreach ($instructors as $instructor)
                             <option value="{{ $instructor->id }}"
                                 {{ old('instructor_id') == $instructor->id ? 'selected' : '' }}>
@@ -66,13 +65,26 @@
                     @enderror
                 </div>
 
-                <!-- Course Image -->
+                <!-- Course Image (Thumbnail) -->
                 <div class="mb-4">
-                    <label for="image" class="block text-gray-700 text-sm font-medium mb-2">Course Image
-                        (Optional)</label>
-                    <input type="file" id="image" name="image"
-                        class="w-full px-4 py-2 border @error('image') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
-                    @error('image')
+                    <label for="thumbnail" class="block text-gray-700 text-sm font-medium mb-2">Course Image (Optional)</label>
+                    <input type="file" id="thumbnail" name="thumbnail"
+                        class="w-full px-4 py-2 border @error('thumbnail') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    @error('thumbnail')
+                        <p class="mt-1 text -red-500 text-sm">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Status -->
+                <div class="mb-4">
+                    <label for="status" class="block text-gray-700 text-sm font-medium mb-2">Status</label>
+                    <select id="status" name="status"
+                        class="w-full px-4 py-2 border @error('status') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        required>
+                        <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>
+                        <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                    </select>
+                    @error('status')
                         <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
