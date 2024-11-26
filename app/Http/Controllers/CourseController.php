@@ -3,81 +3,120 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Models\Instructor;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    // Display the list of courses
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::latest()->paginate(10);
         return view('admin.courses.index', compact('courses'));
     }
 
-    // Show the form to create a new course
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        $instructors = Instructor::all(); // Fetch instructors for the dropdown
-        return view('admin.courses.create', compact('instructors'));
+        return view('admin.courses.create');
     }
 
-    // Store a new course in the database
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'code' => 'required|unique:courses',
-            'title' => 'required|string|max:255|unique:courses,title',
-            'lecture_hours' => 'required|integer',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+        // Validate the request
+        $validatedData = $request->validate([
+            'code' => 'required|unique:courses,code|max:50',
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'thumbnail' => 'nullable|image|max:2048', // Optional image, max 2MB
+            'status' => 'required|in:active,inactive'
         ]);
 
-        // Handle the image upload if present
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('course_images', 'public');
-            $validated['image'] = $imagePath;
+        // Handle file upload
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailPath = $request->file('thumbnail')->store('course_thumbnails', 'public');
+            $validatedData['thumbnail'] = $thumbnailPath;
         }
 
-        Course::create($validated);
+        // Create the course
+        $course = Course::create($validatedData);
 
-        return redirect()->route('courses.index')->with('success', 'Course created successfully!');
+        // Redirect with success message
+        return redirect()->route('courses.index')
+            ->with('success', 'Course created successfully.');
     }
 
-    // Show the form to edit an existing course
+    /**
+     * Display the specified resource.
+     */
+    public function show(Course $course)
+    {
+        return view('admin.courses.show', compact('course'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(Course $course)
     {
-        $instructors = Instructor::all(); // Fetch instructors for the dropdown
-        return view('admin.courses.edit', compact('course', 'instructors'));
+        return view('admin.courses.edit', compact('course'));
     }
 
-    // Update an existing course in the database
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, Course $course)
     {
-        $validated = $request->validate([
-            'code' => 'required|unique:courses',
-            'title' => 'required|string|max:255|unique:courses,title',
-            'lecture_hours' => 'required|integer',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+        // Validate the request
+        $validatedData = $request->validate([
+            'code' => 'required|unique:courses,code,' . $course->id . '|max:50',
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'thumbnail' => 'nullable|image|max:2048', // Optional image, max 2MB
+            'status' => 'required|in:active,inactive'
         ]);
 
-        // Handle the image upload if present
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('course_images', 'public');
-            $validated['image'] = $imagePath;
+        // Handle file upload
+        if ($request->hasFile('thumbnail')) {
+            // Delete old thumbnail if exists
+            if ($course->thumbnail) {
+                Storage::disk('public')->delete($course->thumbnail);
+            }
+
+            $thumbnailPath = $request->file('thumbnail')->store('course_thumbnails', 'public');
+            $validatedData['thumbnail'] = $thumbnailPath;
         }
 
-        $course->update($validated);
+        // Update the course
+        $course->update($validatedData);
 
-        return redirect()->route('courses.index')->with('success', 'Course updated successfully!');
+        // Redirect with success message
+        return redirect()->route('courses.index')
+            ->with('success', 'Course updated successfully.');
     }
 
-    // Delete a course from the database
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Course $course)
     {
+        // Delete thumbnail if exists
+        if ($course->thumbnail) {
+            Storage::disk('public')->delete($course->thumbnail);
+        }
+
+        // Delete the course
         $course->delete();
 
-        return redirect()->route('courses.index')->with('success', 'Course deleted successfully!');
+        // Redirect with success message
+        return redirect()->route('courses.index')
+            ->with('success', 'Course deleted successfully.');
     }
 }

@@ -1,57 +1,90 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div class="container mx-auto px-8 py-6">
-        <div class="flex justify-between items-center mb-4 pb-2 py-2 shadow-md">
-            <h1 class="text-3xl font-bold text-gray-800 px-3">Courses</h1>
-            <a href="{{ route('courses.create') }}"
-                class="bg-green-500 px-4 py-2 rounded-lg text-white hover:bg-green-700 transition-colors duration-300 flex items-center space-x-2">
+    <div class="container mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Courses Management</h1>
+            <a href="{{ route('courses.create') }}" 
+               class="bg-green-500 px-5 py-2 rounded-lg text-white shadow-lg hover:bg-green-700 transition-colors duration-300 flex items-center space-x-2">
                 <i class="ri-add-line text-lg"></i>
-                <span class="font-semibold">Add Course</span>
+                <span class="font-semibold">Add New Course</span>
             </a>
         </div>
-        <div class="">
-            <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
-                <thead>
-                    <tr class="border-b bg-gray-100 text-left">
-                        <th class="px-6 py-3">SN</th>
-                        <th class="px-6 py-3">Course Name</th>
-                        <th class="px-6 py-3">Description</th>
-                        <th class="px-6 py-3">Actions</th>
+
+        @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created At</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @php
-                        $i = 1;
-                    @endphp
-                    @forelse($courses as $course)
-                        <tr class="border-b">
-                            <td class="px-6 py-4">{{ $i++ }}</td>
-                            <td class="px-6 py-4">{{ $course->title }}</td>
-                            <td class="px-6 py-4">{{ $course->description }}</td>
-                            <td class="px-6 py-4 flex space-x-2">
-                                <a href="{{ route('courses.edit', $course->id) }}"
-                                    class="bg-blue-500 px-4 py-2 rounded-lg text-white shadow-lg hover:bg-blue-700 transition-colors duration-300">
-                                    Edit
-                                </a>
-                                <form action="{{ route('courses.destroy', $course->id) }}" method="POST"
-                                    onsubmit="return confirm('Are you sure you want to delete this course?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        class="bg-red-500 px-4 py-2 rounded-lg text-white shadow-lg hover:bg-red-700 transition-colors duration-300">
-                                        Delete
-                                    </button>
-                                </form>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @forelse ($courses as $course)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                {{ $course->code }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ $course->title }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                    {{ $course->status == 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    {{ ucfirst($course->status) }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                {{ $course->created_at->format('M d, Y') }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex justify-end space-x-2">
+                                    <a href="{{ route('courses.show', $course) }}" 
+                                       class="text-blue-600 hover:text-blue-900 transition-colors">
+                                        <i class="ri-eye-line text-lg"></i>
+                                    </a>
+                                    <a href="{{ route('courses.edit', $course) }}" 
+                                       class="text-yellow-600 hover:text-yellow-900 transition-colors">
+                                        <i class="ri-edit-line text-lg"></i>
+                                    </a>
+                                    <form action="{{ route('courses.destroy', $course) }}" 
+                                          method="POST" 
+                                          class="inline-block"
+                                          onsubmit="return confirm('Are you sure you want to delete this course?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" 
+                                                class="text-red-600 hover:text-red-900 transition-colors bg-transparent">
+                                            <i class="ri-delete-bin-line text-lg"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-6 py-4 text-center">No courses found</td>
+                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                No courses found. <a href="{{ route('courses.create') }}" class="text-blue-600">Create your first course</a>
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
+
+            @if ($courses->hasPages())
+                <div class="px-6 py-4 bg-gray-50">
+                    {{ $courses->links() }}
+                </div>
+            @endif
         </div>
     </div>
 @endsection
