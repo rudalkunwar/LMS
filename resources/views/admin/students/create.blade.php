@@ -10,7 +10,7 @@
         </a>
     </div>
     <div class="container mx-auto px-8 py-6">
-        <form action="{{ route('students.store') }}" method="POST">
+        <form action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <!--  Name -->
@@ -83,6 +83,16 @@
                         </select>
                         @error('course_id')
                             <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <!-- User Image (photo) -->
+                    <div class="mb-4">
+                        <label for="photo" class="block text-gray-700 text-sm font-medium mb-2">Student Image
+                            (Optional)</label>
+                        <input type="file" id="photo" name="photo"
+                            class="w-full px-4 py-2 border @error('photo') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        @error('photo')
+                            <p class="mt-1 text -red-500 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
                     <!-- Password -->

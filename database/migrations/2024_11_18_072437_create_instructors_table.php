@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name'); // Instructor's  name
             $table->string('email')->unique(); // Instructor's email (must be unique)
             $table->string('phone_number')->nullable(); // Optional phone number
+            $table->string('photo')->nullable();
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade'); // Foreign key to instructors table
             $table->string('password');
             $table->timestamps();
