@@ -1,43 +1,33 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div class="pl-8 shadow-md container mx-auto flex justify-between items-center py-4">
-        <h1 class="text-3xl font-bold text-gray-800">Edit Instructor</h1>
-        <a href="{{ route('instructors.index') }}"
-            class="bg-red-500 px-5 py-2 rounded-lg text-white shadow-lg hover:bg-red-700 transition-colors duration-300 flex items-center space-x-2">
-            <i class="ri-arrow-left-line text-lg"></i>
-            <span class="font-semibold">Cancel</span>
-        </a>
-    </div>
     <div class="container mx-auto px-8 py-6">
-        <form action="{{ route('instructors.update', $instructor->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-xl font-semibold mb-4">Edit Instructor</h2>
-                <!-- First Name Field -->
+        <div class="flex justify-between items-center py-2 mb-4 pb-2 shadow-md">
+            <h1 class="text-3xl font-bold text-gray-800 px-4">Edit Instructor</h1>
+            <a href="{{ route('instructors.index') }}"
+                class="bg-red-500 px-5 py-2 rounded-lg text-white shadow-lg hover:bg-red-700 transition-colors duration-300 flex items-center space-x-2">
+                <i class="ri-arrow-left-line text-lg"></i>
+                <span class="font-semibold">Back</span>
+            </a>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <form action="{{ route('instructors.update', $instructor->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <!-- Name -->
                 <div class="mb-4">
-                    <label for="first_name" class="block text-gray-700 text-sm font-medium mb-2">First Name</label>
-                    <input type="text" id="first_name" name="first_name"
-                        class="w-full px-4 py-2 border @error('first_name') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        value="{{ old('first_name', $instructor->first_name) }}" required>
-                    @error('first_name')
+                    <label for="name" class="block text-gray-700 text-sm font-medium mb-2">Name</label>
+                    <input type="text" id="name" name="name"
+                        class="w-full px-4 py-2 border @error('name') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                        value="{{ old('name', $instructor->name) }}" required>
+                    @error('name')
                         <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <!-- Last Name Field -->
-                <div class="mb-4">
-                    <label for="last_name" class="block text-gray-700 text-sm font-medium mb-2">Last Name</label>
-                    <input type="text" id="last_name" name="last_name"
-                        class="w-full px-4 py-2 border @error('last_name') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        value="{{ old('last_name', $instructor->last_name) }}" required>
-                    @error('last_name')
-                        <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <!-- Email Field -->
+                <!-- Email -->
                 <div class="mb-4">
                     <label for="email" class="block text-gray-700 text-sm font-medium mb-2">Email</label>
                     <input type="email" id="email" name="email"
@@ -48,7 +38,7 @@
                     @enderror
                 </div>
 
-                <!-- Phone Number Field -->
+                <!-- Phone Number -->
                 <div class="mb-4">
                     <label for="phone_number" class="block text-gray-700 text-sm font-medium mb-2">Phone Number</label>
                     <input type="text" id="phone_number" name="phone_number"
@@ -59,45 +49,66 @@
                     @enderror
                 </div>
 
-                <!-- Department Field -->
+                <!-- Course -->
                 <div class="mb-4">
-                    <label for="department" class="block text-gray-700 text-sm font-medium mb-2">Department</label>
-                    <input type="text" id="department" name="department"
-                        class="w-full px-4 py-2 border @error('department') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        value="{{ old('department', $instructor->department) }}">
-                    @error('department')
-                        <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
-                    @enderror
-                </div>
-                <!-- Password -->
-                <div class="mb-4">
-                    <label for="password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
-                    <input type="password" id="password" name="password"
-                        class="w-full px-4 py-2 border @error('password') border-red-500  @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        value="{{ old('password') }}">
-                    @error('password')
+                    <label for="course_id" class="block text-gray-700 text-sm font-medium mb-2">Assign Course</label>
+                    <select id="course_id" name="course_id"
+                        class="w-full px-4 py-2 border @error('course_id') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <option value="">Select Course</option>
+                        @foreach ($courses as $course)
+                            <option value="{{ $course->id }}"
+                                {{ $instructor->course_id == $course->id ? 'selected' : '' }}>
+                                {{ $course->title }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('course_id')
                         <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <!-- Confirm Password -->
+                <!-- User Image (photo) -->
                 <div class="mb-4">
-                    <label for="confirm_password" class="block text-gray-700 text-sm font-medium mb-2">Confirm
-                        password</label>
-                    <input type="password" id="confirm_password" name="confirm_password"
-                        class="w-full px-4 py-2 border @error('confirm_password') border-red-500  @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                        value="{{ old('confirm_password') }}">
-                    @error('confirm_password')
-                        <p class="mt-1 text-red-500 text-sm">{{ $message }}</p>
+                    <label for="photo" class="block text-gray-700 text-sm font-medium mb-2">Instructor Image
+                        (Optional)</label>
+                    <input type="file" id="photo" name="photo"
+                        class="w-full px-4 py-2 border @error('photo') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    @error('photo')
+                        <p class="mt-1 text -red-500 text-sm">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="flex justify-end">
-                    <button type="submit"
-                        class="bg-blue-500 px-6 py-2 w-full rounded-lg text-white shadow-lg hover:bg-blue-700 transition-colors duration-300">
-                        Update
-                    </button>
-                </div>
-            </div>
-        </form>
+
+                <button type="submit"
+                    class="bg-blue-500 w-full px-6 py-2 rounded-lg text-white shadow-lg hover:bg-blue-700 transition-colors duration-300">
+                    Update Instructor
+                </button>
+            </form>
+        </div>
     </div>
+    <script>
+        // Optional: Preview image before upload
+        document.getElementById('photo').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const preview = document.createElement('img');
+                preview.src = e.target.result;
+                preview.classList.add('h-32', 'w-auto', 'object-cover', 'rounded-lg', 'mt-2');
+
+                const previewContainer = document.querySelector('.mt-2');
+                if (previewContainer) {
+                    previewContainer.innerHTML = '';
+                    previewContainer.appendChild(preview);
+                } else {
+                    event.target.closest('.mb-4').querySelector('label').insertAdjacentElement('afterend',
+                        preview);
+                }
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 @endsection

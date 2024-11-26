@@ -51,13 +51,11 @@ class StudentController extends Controller
         $student->course_id = $validated['course_id'];
         $student->password = bcrypt($validated['password']); // Encrypt password
 
-
         // Handle file upload
         if ($request->hasFile('photo')) {
             $photoPath = $request->file('photo')->store('user_photos', 'public');
             $student->photo = $photoPath;
         }
-
         $student->save();
 
 
@@ -102,9 +100,6 @@ class StudentController extends Controller
         $student->address = $validated['address'] ?? null;
         $student->dob = $validated['dob'] ?? null;
         $student->course_id = $validated['course_id'];
-
-
-
         // Handle file upload
         if ($request->hasFile('photo')) {
             // Delete old photo if exists
@@ -117,9 +112,6 @@ class StudentController extends Controller
         }
 
         $student->save();
-
-
-
         return redirect()->route('students.index')->with('success', 'Student updated successfully!');
     }
 
