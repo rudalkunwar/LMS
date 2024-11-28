@@ -14,8 +14,7 @@ class InstructorController extends Controller
      */
     public function index()
     {
-        $instructors = Instructor::all(); // Fetch all instructors
-        return view('admin.instructors.index', compact('instructors'));
+        return view('admin.instructors.index', ['instructors' => Instructor::all()]);
     }
 
     /**
@@ -23,8 +22,7 @@ class InstructorController extends Controller
      */
     public function create()
     {
-        $courses = Course::all(); // Fetch all available courses
-        return view('admin.instructors.create', compact('courses'));
+        return view('admin.instructors.create', ['courses' => Course::all()]);
     }
 
     /**
@@ -38,23 +36,17 @@ class InstructorController extends Controller
             'phone_number' => 'nullable|string|max:15',
             'course_id' => 'required|exists:courses,id',
             'password' => 'required|string|min:8|confirmed',
+            'photo' => 'nullable|image',
         ]);
 
-        $instructor = new Instructor();
-        $instructor->name = $validated['name'];
-        $instructor->email = $validated['email'];
-        $instructor->phone_number = $validated['phone_number'] ?? null;
-        $instructor->course_id = $validated['course_id'];
-        $instructor->password = bcrypt($validated['password']); // Encrypt password
-
-        // Handle file upload
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('instructor_photos', 'public');
-            $instructor->photo = $photoPath;
-        }
-        $instructor->save();
-
-
+        $instructor = Instructor::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
+            'course_id' => $validated['course_id'],
+            'password' => $validated['password'], // Model will handle hashing
+            'photo' => $request->hasFile('photo') ? $request->file('photo')->store('instructor_photos', 'public') : null,
+        ]);
 
         return redirect()->route('instructors.index')->with('success', 'Instructor created successfully!');
     }
@@ -72,8 +64,7 @@ class InstructorController extends Controller
      */
     public function edit(Instructor $instructor)
     {
-        $courses = Course::all();
-        return view('admin.instructors.edit', compact('instructor', 'courses'));
+        return view('admin.instructors.edit', ['instructor' => $instructor, 'courses' => Course::all()]);
     }
 
     /**
@@ -86,38 +77,38 @@ class InstructorController extends Controller
             'email' => 'required|email|unique:instructors,email,' . $instructor->id,
             'phone_number' => 'nullable|string|max:15',
             'course_id' => 'required|exists:courses,id',
+            'photo' => 'nullable|image',
         ]);
 
-        $instructor->name = $validated['name'];
-        $instructor->email = $validated['email'];
-        $instructor->phone_number = $validated['phone_number'] ?? null;
-        $instructor->course_id = $validated['course_id'];
-        // Handle file upload
-        if ($request->hasFile('photo')) {
-            // Delete old photo if exists
-            if ($instructor->photo) {
-                Storage::disk('public')->delete($instructor->photo);
-            }
+        $instructor->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
+            'course_id' => $validated['course_id'],
+            'photo' => $request->hasFile('photo') 
+                ? $request->file('photo')->store('instructor_photos', 'public') 
+                : $instructor->photo,
+        ]);
 
-            $photoPath = $request->file('photo')->store('instructor_photos', 'public');
-            $instructor->photo = $photoPath;
+        if ($request->hasFile('photo') && $instructor->wasChanged('photo')) {
+            // Delete old photo if it was replaced
+            Storage::disk('public')->delete($instructor->getOriginal('photo'));
         }
 
-        $instructor->save();
         return redirect()->route('instructors.index')->with('success', 'Instructor updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Instructor $Instructor)
+    public function destroy(Instructor $instructor)
     {
         // Delete photo if exists
-        if ($Instructor->photo) {
-            Storage::disk('public')->delete($Instructor->photo);
+        if ($instructor->photo) {
+            Storage::disk('public')->delete($instructor->photo);
         }
 
-        $Instructor->delete();
+        $instructor->delete();
 
         return redirect()->route('instructors.index')->with('success', 'Instructor deleted successfully!');
     }

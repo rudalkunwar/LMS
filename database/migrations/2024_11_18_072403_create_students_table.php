@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->foreignId('course_id')->constrained()->onDelete('cascade'); // Ensure this line exists
             $table->string('password');
+            $table->rememberToken(); 
             $table->timestamps();
         });
         

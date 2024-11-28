@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade'); // Foreign key to instructors table
             $table->string('password');
+            $table->rememberToken(); 
             $table->timestamps();
         });
     }

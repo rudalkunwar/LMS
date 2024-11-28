@@ -14,8 +14,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all(); // Fetch all students
-        return view('admin.students.index', compact('students'));
+        return view('admin.students.index', ['students' => Student::all()]);
     }
 
     /**
@@ -23,8 +22,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $courses = Course::all(); // Fetch all available courses
-        return view('admin.students.create', compact('courses'));
+        return view('admin.students.create', ['courses' => Course::all()]);
     }
 
     /**
@@ -40,31 +38,25 @@ class StudentController extends Controller
             'dob' => 'nullable|date',
             'course_id' => 'required|exists:courses,id',
             'password' => 'required|string|min:8|confirmed',
+            'photo' => 'nullable|image', // You can validate photo type here
         ]);
 
-        $student = new Student();
-        $student->name = $validated['name'];
-        $student->email = $validated['email'];
-        $student->phone_number = $validated['phone_number'] ?? null;
-        $student->address = $validated['address'] ?? null;
-        $student->dob = $validated['dob'] ?? null;
-        $student->course_id = $validated['course_id'];
-        $student->password = bcrypt($validated['password']); // Encrypt password
-
-        // Handle file upload
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('user_photos', 'public');
-            $student->photo = $photoPath;
-        }
-        $student->save();
-
-
+        $student = Student::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
+            'address' => $validated['address'],
+            'dob' => $validated['dob'],
+            'course_id' => $validated['course_id'],
+            'password' => $validated['password'], // Model will hash this automatically
+            'photo' => $request->hasFile('photo') ? $request->file('photo')->store('student_photos', 'public') : null,
+        ]);
 
         return redirect()->route('students.index')->with('success', 'Student created successfully!');
     }
 
     /**
-     * Display the specified resource.
+     * Show the specified resource.
      */
     public function show(Student $student)
     {
@@ -76,8 +68,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        $courses = Course::all();
-        return view('admin.students.edit', compact('student', 'courses'));
+        return view('admin.students.edit', ['student' => $student, 'courses' => Course::all()]);
     }
 
     /**
@@ -92,26 +83,19 @@ class StudentController extends Controller
             'address' => 'nullable|string|max:255',
             'dob' => 'nullable|date',
             'course_id' => 'required|exists:courses,id',
+            'photo' => 'nullable|image',
         ]);
 
-        $student->name = $validated['name'];
-        $student->email = $validated['email'];
-        $student->phone_number = $validated['phone_number'] ?? null;
-        $student->address = $validated['address'] ?? null;
-        $student->dob = $validated['dob'] ?? null;
-        $student->course_id = $validated['course_id'];
-        // Handle file upload
-        if ($request->hasFile('photo')) {
-            // Delete old photo if exists
-            if ($student->photo) {
-                Storage::disk('public')->delete($student->photo);
-            }
+        $student->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
+            'address' => $validated['address'],
+            'dob' => $validated['dob'],
+            'course_id' => $validated['course_id'],
+            'photo' => $request->hasFile('photo') ? $request->file('photo')->store('student_photos', 'public') : $student->photo,
+        ]);
 
-            $photoPath = $request->file('photo')->store('student_photos', 'public');
-            $student->photo = $photoPath;
-        }
-
-        $student->save();
         return redirect()->route('students.index')->with('success', 'Student updated successfully!');
     }
 
@@ -120,7 +104,6 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        // Delete photo if exists
         if ($student->photo) {
             Storage::disk('public')->delete($student->photo);
         }
