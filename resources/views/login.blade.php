@@ -5,9 +5,8 @@
         <div class="flex justify-center items-center gap-6 max-w-6xl w-full">
             <!-- Form Section -->
             <div class="border border-gray-300 rounded-lg p-6 shadow-lg w-1/2">
-                <form class="space-y-6" method="POST" action="/login">
+                <form class="space-y-6" method="POST" action="{{ route('admin.login') }}">
                     @csrf <!-- Assuming you are using Laravel's CSRF protection -->
-
                     <!-- Heading -->
                     <div class="mb-6">
                         <h3 class="text-gray-800 text-3xl font-extrabold">Sign in</h3>

@@ -29,7 +29,7 @@ class AuthenticationController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard')->with('success', 'Logged in successfully.');
+            return redirect()->intended('admin.dashboard')->with('success', 'Logged in successfully.');
         }
 
         return back()->withErrors([
@@ -64,7 +64,7 @@ class AuthenticationController extends Controller
 
         Auth::login($user);
 
-        return redirect('dashboard')->with('success', 'Account created successfully.');
+        return redirect('admin.dashboard')->with('success', 'Account created successfully.');
     }
 
     /**

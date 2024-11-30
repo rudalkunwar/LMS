@@ -22,8 +22,8 @@ class InstructorAuthenticationController extends Controller
             'password' => 'required',
         ]);
 
-        // Attempt to log in the instructor
-        if (Auth::attempt($request->only('email', 'password'))) {
+        // Attempt to log in the instructor using the instructor guard
+        if (Auth::guard('instructor')->attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
             return redirect()->intended(route('instructor.dashboard'));
         }
@@ -34,10 +34,10 @@ class InstructorAuthenticationController extends Controller
         ]);
     }
 
-    // Logout Instructor
+    // Logout instructor
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('instructor')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

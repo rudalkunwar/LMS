@@ -17,11 +17,28 @@ Route::get('login', function () {
     return view('login');
 });
 
-Route::get('/login', [AuthenticationController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthenticationController::class, 'login']);
-Route::get('/register', [AuthenticationController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [AuthenticationController::class, 'register']);
-Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
+// Admiin Routes
+// Group for 'admin' routes
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    // For guests (not logged in as admin)
+    Route::middleware('guest')->group(function () {
+        // Admin login form and login POST request
+        Route::get('/login', [AuthenticationController::class, 'showLoginForm'])->name('login');
+        Route::post('/login', [AuthenticationController::class, 'login']);
+    });
+
+    // For authenticated admins
+    Route::middleware('auth')->group(function () {
+        // Admin logout
+        Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
+
+        // Admin dashboard (for authenticated admins only)
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard'); 
+        })->name('dashboard');
+    });
+});
 
 // Student Routes
 Route::prefix('student')->name('student.')->group(function () {
@@ -56,7 +73,3 @@ Route::resource('instructors', InstructorController::class);
 // Resource Routes for Courses
 Route::resource('courses', CourseController::class);
 // });
-
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');

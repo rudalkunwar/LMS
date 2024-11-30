@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class RedirectInstructorIfAuthenticated
+class RedirectAdminIfAuthenticated
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,12 @@ class RedirectInstructorIfAuthenticated
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('instructor')->check()) {
-            // If already authenticated as an instructor, redirect to the instructor dashboard
-            return redirect()->route('instructor.dashboard');
+        // If the user is authenticated, redirect them to their respective dashboard
+        if (Auth::check()) {
+            // Redirect logged-in users (whether they are admins or normal users) to the dashboard
+            return redirect()->route('admin.dashboard'); // or any default route for logged-in users
         }
-        //  return redirect()->route('instructor.dashboard');
+
+        return $next($request);
     }
 }
