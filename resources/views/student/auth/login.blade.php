@@ -10,6 +10,12 @@
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
             <form class="space-y-6" action="{{ route('student.login') }}" method="POST">
+                @csrf
+                @error('email')
+                    <div class="mb-6 px-2">
+                        <h3 class="text-red-600">{{ $message }}</h3>
+                    </div>
+                @enderror
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700">
                         Email address

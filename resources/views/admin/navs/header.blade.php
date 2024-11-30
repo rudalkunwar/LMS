@@ -43,8 +43,11 @@
                         <div class="py-1">
                             <a href=""
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-                            <a href="{{ route('logout') }}"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button class="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    type="submit">Logout</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -55,7 +58,6 @@
 
 @push('script')
     <script>
-
         function toggleProfileDropdown() {
             const dropdownMenu = document.getElementById('profileDropdownMenu');
             dropdownMenu.classList.toggle('hidden');

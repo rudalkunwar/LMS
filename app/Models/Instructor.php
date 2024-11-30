@@ -13,14 +13,13 @@ class Instructor extends Authenticatable
 
     // Fillable attributes
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'email',
         'phone_number',
         'address',
         'dob',
         'course_id',
-        'password', // Include password field to be fillable
+        'password', 
     ];
 
     // Define the relationship with the Course model

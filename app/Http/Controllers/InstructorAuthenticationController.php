@@ -11,7 +11,7 @@ class InstructorAuthenticationController extends Controller
     // Show Login Form
     public function showLoginForm()
     {
-        return view('instructor.login');
+        return view('instructor.auth.login');
     }
 
     // Handle Login Request

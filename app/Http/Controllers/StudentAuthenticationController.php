@@ -11,7 +11,7 @@ class StudentAuthenticationController extends Controller
     // Show Login Form
     public function showLoginForm()
     {
-        return view('students.auth.login');
+        return view('student.auth.login');
     }
 
     // Handle Login Request
@@ -22,8 +22,8 @@ class StudentAuthenticationController extends Controller
             'password' => 'required',
         ]);
 
-        // Attempt to log in the student
-        if (Auth::attempt($request->only('email', 'password'))) {
+        // Attempt to log in the student using the student guard
+        if (Auth::guard('student')->attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
             return redirect()->intended(route('student.dashboard'));
         }
@@ -37,7 +37,7 @@ class StudentAuthenticationController extends Controller
     // Logout Student
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('student')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

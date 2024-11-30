@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\InstructorAuthenticationController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentAuthenticationController;
@@ -24,24 +25,36 @@ Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logou
 
 // Student Routes
 Route::prefix('student')->name('student.')->group(function () {
-    Route::middleware('guest')->group(function () {
+    Route::middleware('guest:student')->group(function () {
         Route::get('login', [StudentAuthenticationController::class, 'showLoginForm'])->name('login');
         Route::post('login', [StudentAuthenticationController::class, 'login']);
     });
-    Route::middleware('auth')->group(function () {
+    Route::middleware('auth:student')->group(function () {
         Route::post('logout', [StudentAuthenticationController::class, 'logout'])->name('logout');
         Route::get('dashboard', [StudentAuthenticationController::class, 'dashboard'])->name('dashboard');
     });
 });
 
+// Instructor Routes
+Route::prefix('instructor')->name('instructor.')->group(function () {
+    Route::middleware('guest:instructor')->group(function () {
+        Route::get('login', [InstructorAuthenticationController::class, 'showLoginForm'])->name('login');
+        Route::post('login', [InstructorAuthenticationController::class, 'login']);
+    });
+    Route::middleware('auth:instructor')->group(function () {
+        Route::post('logout', [InstructorAuthenticationController::class, 'logout'])->name('logout');
+        Route::get('dashboard', [InstructorAuthenticationController::class, 'dashboard'])->name('dashboard');
+    });
+});
+
 // Admin Routes (for managing students)
 // Route::prefix('admin')->name('admin.')->group(function () {
-    // Resource Routes for Students
-    Route::resource('students', StudentController::class);
-    // Resource Routes for Instructors
-    Route::resource('instructors', InstructorController::class);
-    // Resource Routes for Courses
-    Route::resource('courses', CourseController::class);
+// Resource Routes for Students
+Route::resource('students', StudentController::class);
+// Resource Routes for Instructors
+Route::resource('instructors', InstructorController::class);
+// Resource Routes for Courses
+Route::resource('courses', CourseController::class);
 // });
 
 Route::get('/dashboard', function () {
