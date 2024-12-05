@@ -1,4 +1,4 @@
-<aside id="sidebar" class="fixed md:static w-72 h-screen bg-gray-900 text-white z-30">
+<aside id="sidebar" class="fixed md:static w-72 h-screen bg-pink-900 text-white z-30">
     <div class="flex flex-col h-full">
         <!-- Logo Section -->
         <div class="p-6 border-b border-gray-700">
@@ -15,7 +15,7 @@
             <ul class="p-4 space-y-6">
                 <!-- Dashboard Section -->
                 <li>
-                    <a href="{{ route('admin.dashboard') }}"
+                    <a href="{{ route('student.dashboard') }}"
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/dashboard') ? 'active' : '' }}">
                         <i class="ri-dashboard-line w-5"></i>
                         <span class="text-md">Dashboard</span>
@@ -23,29 +23,11 @@
                 </li>
 
                 <!-- College Management Section -->
-                <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">College Management</li>
-
-                <!-- Instructors -->
-                <li>
-                    <a href="{{ route('admin.instructors.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/instructors') ? 'active' : '' }}">
-                        <i class="ri-user-star-line w-5"></i>
-                        <span class="text-md">Instructors</span>
-                    </a>
-                </li>
-
-                <!-- Students -->
-                <li>
-                    <a href="{{ route('admin.students.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/students') ? 'active' : '' }}">
-                        <i class="ri-user-line w-5"></i>
-                        <span class="text-md">Students</span>
-                    </a>
-                </li>
+                <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">Activity</li>
 
                 <!-- Courses -->
                 <li>
-                    <a href="{{route('admin.courses.index')}}"
+                    <a href="{{ route('student.courses') }}"
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/courses') ? 'active' : '' }}">
                         <i class="ri-book-line w-5"></i>
                         <span class="text-md">Courses</span>
@@ -54,7 +36,7 @@
 
                 <!-- Assignments -->
                 <li>
-                    <a href=""
+                    <a href="{{route('student.assignments.index')}}"
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/assignments') ? 'active' : '' }}">
                         <i class="ri-file-list-line w-5"></i>
                         <span class="text-md">Assignments</span>
@@ -71,26 +53,7 @@
                 </li>
 
                 <!-- System Management Section -->
-                <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">System Management</li>
-
-                <!-- Admin Roles -->
-                <li>
-                    <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/roles') ? 'active' : '' }}">
-                        <i class="ri-lock-line w-5"></i>
-                        <span class="text-md">Roles & Permissions</span>
-                    </a>
-                </li>
-
-                <!-- Settings -->
-                <li>
-                    <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/settings') ? 'active' : '' }}">
-                        <i class="ri-settings-3-line w-5"></i>
-                        <span class="text-md">System Settings</span>
-                    </a>
-                </li>
-
+                <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">Others</li>
                 <!-- Reports -->
                 <li>
                     <a href=""

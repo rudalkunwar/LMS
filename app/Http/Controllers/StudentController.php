@@ -52,7 +52,7 @@ class StudentController extends Controller
             'photo' => $request->hasFile('photo') ? $request->file('photo')->store('student_photos', 'public') : null,
         ]);
 
-        return redirect()->route('students.index')->with('success', 'Student created successfully!');
+        return redirect()->route('admin.students.index')->with('success', 'Student created successfully!');
     }
 
     /**
@@ -96,7 +96,7 @@ class StudentController extends Controller
             'photo' => $request->hasFile('photo') ? $request->file('photo')->store('student_photos', 'public') : $student->photo,
         ]);
 
-        return redirect()->route('students.index')->with('success', 'Student updated successfully!');
+        return redirect()->route('admin.students.index')->with('success', 'Student updated successfully!');
     }
 
     /**
@@ -110,6 +110,11 @@ class StudentController extends Controller
 
         $student->delete();
 
-        return redirect()->route('students.index')->with('success', 'Student deleted successfully!');
+        return redirect()->route('admin.students.index')->with('success', 'Student deleted successfully!');
+    }
+
+    public function courses()
+    {
+        return view('student.courses.index');
     }
 }

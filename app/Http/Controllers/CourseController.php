@@ -49,7 +49,7 @@ class CourseController extends Controller
         $course = Course::create($validatedData);
 
         // Redirect with success message
-        return redirect()->route('courses.index')
+        return redirect()->route('admin.courses.index')
             ->with('success', 'Course created successfully.');
     }
 
@@ -98,7 +98,7 @@ class CourseController extends Controller
         $course->update($validatedData);
 
         // Redirect with success message
-        return redirect()->route('courses.index')
+        return redirect()->route('admin.courses.index')
             ->with('success', 'Course updated successfully.');
     }
 
@@ -116,7 +116,7 @@ class CourseController extends Controller
         $course->delete();
 
         // Redirect with success message
-        return redirect()->route('courses.index')
+        return redirect()->route('admin.courses.index')
             ->with('success', 'Course deleted successfully.');
     }
 }

@@ -48,7 +48,7 @@ class InstructorController extends Controller
             'photo' => $request->hasFile('photo') ? $request->file('photo')->store('instructor_photos', 'public') : null,
         ]);
 
-        return redirect()->route('instructors.index')->with('success', 'Instructor created successfully!');
+        return redirect()->route('admin.instructors.index')->with('success', 'Instructor created successfully!');
     }
 
     /**
@@ -95,7 +95,7 @@ class InstructorController extends Controller
             Storage::disk('public')->delete($instructor->getOriginal('photo'));
         }
 
-        return redirect()->route('instructors.index')->with('success', 'Instructor updated successfully!');
+        return redirect()->route('admin.instructors.index')->with('success', 'Instructor updated successfully!');
     }
 
     /**
@@ -110,6 +110,6 @@ class InstructorController extends Controller
 
         $instructor->delete();
 
-        return redirect()->route('instructors.index')->with('success', 'Instructor deleted successfully!');
+        return redirect()->route('admin.instructors.index')->with('success', 'Instructor deleted successfully!');
     }
 }

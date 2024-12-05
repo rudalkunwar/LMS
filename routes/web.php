@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminAuthenticationController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstructorAuthenticationController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\StudentAssignmentsController;
 use App\Http\Controllers\StudentAuthenticationController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,11 @@ Route::prefix('student')->name('student.')->group(function () {
         // Additional student-specific routes
         Route::get('courses', [StudentController::class, 'courses'])
             ->name('courses');
+
+        Route::resources([
+            'assignments' => StudentAssignmentsController::class,
+
+        ]);
         Route::get('profile', [StudentController::class, 'profile'])
             ->name('profile');
     });

@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
-
+@push('title')
+    Create Course
+@endpush
 @section('content')
     <div class="pl-8 shadow-md container mx-auto flex justify-between items-center py-4">
         <h1 class="text-3xl font-bold text-gray-800">Add Courses</h1>
@@ -48,7 +50,8 @@
 
                 <!-- Course Image (Thumbnail) -->
                 <div class="mb-4">
-                    <label for="thumbnail" class="block text-gray-700 text-sm font-medium mb-2">Course Image (Optional)</label>
+                    <label for="thumbnail" class="block text-gray-700 text-sm font-medium mb-2">Course Image
+                        (Optional)</label>
                     <input type="file" id="thumbnail" name="thumbnail"
                         class="w-full px-4 py-2 border @error('thumbnail') border-red-500 @enderror rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                     @error('thumbnail')

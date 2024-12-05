@@ -25,15 +25,6 @@
                 <!-- College Management Section -->
                 <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">College Management</li>
 
-                <!-- Instructors -->
-                <li>
-                    <a href="{{ route('admin.instructors.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/instructors') ? 'active' : '' }}">
-                        <i class="ri-user-star-line w-5"></i>
-                        <span class="text-md">Instructors</span>
-                    </a>
-                </li>
-
                 <!-- Students -->
                 <li>
                     <a href="{{ route('admin.students.index') }}"
@@ -45,7 +36,7 @@
 
                 <!-- Courses -->
                 <li>
-                    <a href="{{route('admin.courses.index')}}"
+                    <a href="{{ route('admin.courses.index') }}"
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/courses') ? 'active' : '' }}">
                         <i class="ri-book-line w-5"></i>
                         <span class="text-md">Courses</span>
@@ -69,28 +60,8 @@
                         <span class="text-md">Grades</span>
                     </a>
                 </li>
-
-                <!-- System Management Section -->
-                <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">System Management</li>
-
-                <!-- Admin Roles -->
-                <li>
-                    <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/roles') ? 'active' : '' }}">
-                        <i class="ri-lock-line w-5"></i>
-                        <span class="text-md">Roles & Permissions</span>
-                    </a>
-                </li>
-
-                <!-- Settings -->
-                <li>
-                    <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/settings') ? 'active' : '' }}">
-                        <i class="ri-settings-3-line w-5"></i>
-                        <span class="text-md">System Settings</span>
-                    </a>
-                </li>
-
+                <!-- College Management Section -->
+                <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">Others</li>
                 <!-- Reports -->
                 <li>
                     <a href=""
