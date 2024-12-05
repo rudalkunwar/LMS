@@ -11,6 +11,11 @@ class InstructorAuthenticationController extends Controller
     // Show Login Form
     public function showLoginForm()
     {
+        // Redirect authenticated instructors to the dashboard
+        if (Auth::guard('instructor')->check()) {
+            return redirect()->route('instructor.dashboard');
+        }
+
         return view('instructor.auth.login');
     }
 

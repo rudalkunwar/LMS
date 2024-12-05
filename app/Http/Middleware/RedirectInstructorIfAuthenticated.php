@@ -20,6 +20,6 @@ class RedirectInstructorIfAuthenticated
             // If already authenticated as an instructor, redirect to the instructor dashboard
             return redirect()->route('instructor.dashboard');
         }
-        //  return redirect()->route('instructor.dashboard');
+         return redirect()->route('instructor.dashboard');
     }
 }

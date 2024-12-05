@@ -5,12 +5,12 @@
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-gray-800">Course Details</h1>
             <div class="flex space-x-2">
-                <a href="{{ route('courses.edit', $course) }}" 
+                <a href="{{ route('admin.courses.edit', $course) }}" 
                    class="bg-yellow-500 px-4 py-2 rounded-lg text-white shadow-lg hover:bg-yellow-600 transition-colors duration-300 flex items-center space-x-2">
                     <i class="ri-edit-line"></i>
                     <span>Edit</span>
                 </a>
-                <a href="{{ route('courses.index') }}"
+                <a href="{{ route('admin.courses.index') }}"
                    class="bg-gray-500 px-4 py-2 rounded-lg text-white shadow-lg hover:bg-gray-600 transition-colors duration-300 flex items-center space-x-2">
                     <i class="ri-arrow-left-line"></i>
                     <span>Back to Courses</span>

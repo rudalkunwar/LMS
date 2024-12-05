@@ -3,14 +3,14 @@
 @section('content')
     <div class="pl-8 shadow-md container mx-auto flex justify-between items-center py-4">
         <h1 class="text-3xl font-bold text-gray-800">Edit Course</h1>
-        <a href="{{ route('courses.index') }}"
+        <a href="{{ route('admin.courses.index') }}"
             class="bg-red-500 px-5 py-2 rounded-lg text-white shadow-lg hover:bg-red-700 transition-colors duration-300 flex items-center space-x-2">
             <i class="ri-arrow-left-line text-lg"></i>
             <span class="font-semibold">Cancel</span>
         </a>
     </div>
     <div class="container mx-auto px-8 py-6">
-        <form action="{{ route('courses.update', $course) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.courses.update', $course) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="bg-white p-6 rounded-lg shadow-md">

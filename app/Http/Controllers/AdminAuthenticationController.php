@@ -6,17 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class StudentAuthenticationController extends Controller
+class AdminAuthenticationController extends Controller
 {
     // Show Login Form
     public function showLoginForm()
     {
-        // Redirect authenticated students to the dashboard
-        if (Auth::guard('student')->check()) {
-            return redirect()->route('student.dashboard');
+        // Redirect authenticated admins to the dashboard
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
         }
 
-        return view('student.auth.login');
+        return view('admin.login');
     }
 
     // Handle Login Request
@@ -27,32 +27,32 @@ class StudentAuthenticationController extends Controller
             'password' => 'required',
         ]);
 
-        // Attempt to log in the student using the student guard
-        if (Auth::guard('student')->attempt($request->only('email', 'password'))) {
+        // Attempt to log in the admin using the admin guard
+        if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
-            return redirect()->intended(route('student.dashboard'));
+            return redirect()->intended(route('admin.dashboard')); // Redirect to the dashboard
         }
 
         // If login fails
         throw ValidationException::withMessages([
-            'email' => __('auth.failed'),
+            'email' => __('auth.failed'), // You can add a custom error message here if you like
         ]);
     }
 
-    // Logout Student
+    // Logout admin
     public function logout(Request $request)
     {
-        Auth::guard('student')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('student.login');
+        return redirect()->route('admin.login'); // Redirect back to login after logout
     }
 
     // Show Dashboard
     public function dashboard()
     {
-        return view('student.dashboard');
+        return view('admin.dashboard'); // Dashboard view for the admin
     }
 }

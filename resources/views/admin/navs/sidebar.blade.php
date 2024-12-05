@@ -15,7 +15,7 @@
             <ul class="p-4 space-y-6">
                 <!-- Dashboard Section -->
                 <li>
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route('admin.dashboard') }}"
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/dashboard') ? 'active' : '' }}">
                         <i class="ri-dashboard-line w-5"></i>
                         <span class="text-md">Dashboard</span>
@@ -27,7 +27,7 @@
 
                 <!-- Instructors -->
                 <li>
-                    <a href="{{ route('instructors.index') }}"
+                    <a href="{{ route('admin.instructors.index') }}"
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/instructors') ? 'active' : '' }}">
                         <i class="ri-user-star-line w-5"></i>
                         <span class="text-md">Instructors</span>
@@ -36,7 +36,7 @@
 
                 <!-- Students -->
                 <li>
-                    <a href="{{ route('students.index') }}"
+                    <a href="{{ route('admin.students.index') }}"
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/students') ? 'active' : '' }}">
                         <i class="ri-user-line w-5"></i>
                         <span class="text-md">Students</span>
@@ -45,7 +45,7 @@
 
                 <!-- Courses -->
                 <li>
-                    <a href="{{route('courses.index')}}"
+                    <a href="{{route('admin.courses.index')}}"
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/courses') ? 'active' : '' }}">
                         <i class="ri-book-line w-5"></i>
                         <span class="text-md">Courses</span>

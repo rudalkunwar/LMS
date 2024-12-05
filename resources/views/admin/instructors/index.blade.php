@@ -4,7 +4,7 @@
     <div class="container mx-auto px-8 py-6">
         <div class="flex justify-between items-center py-2 mb-6 shadow-md">
             <h1 class="text-3xl font-bold text-gray-800 px-4">Instructors Management</h1>
-            <a href="{{ route('instructors.create') }}"
+            <a href="{{ route('admin.instructors.create') }}"
                 class="bg-green-500 px-5 py-2 rounded-lg text-white shadow-lg hover:bg-green-700 transition-colors duration-300 flex items-center space-x-2">
                 <i class="ri-add-line text-lg"></i>
                 <span class="font-semibold">Add New instructor</span>
@@ -53,15 +53,15 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-2">
-                                    <a href="{{ route('instructors.show', $instructor) }}"
+                                    <a href="{{ route('admin.instructors.show', $instructor) }}"
                                         class="text-blue-600 hover:text-blue-900 transition-colors">
                                         <i class="ri-eye-line text-lg"></i>
                                     </a>
-                                    <a href="{{ route('instructors.edit', $instructor->id) }}"
+                                    <a href="{{ route('admin.instructors.edit', $instructor->id) }}"
                                         class="text-yellow-600 hover:text-yellow-900 transition-colors">
                                         <i class="ri-edit-line text-lg"></i>
                                     </a>
-                                    <form action="{{ route('instructors.destroy', $instructor) }}" method="POST"
+                                    <form action="{{ route('admin.instructors.destroy', $instructor) }}" method="POST"
                                         class="inline-block"
                                         onsubmit="return confirm('Are you sure you want to delete this instructor?');">
                                         @csrf
@@ -77,7 +77,7 @@
                     @empty
                         <tr>
                             <td colspan="7" class="px-6 py-4 text-center text-gray-500">
-                                No instructors found. <a href="{{ route('instructors.create') }}" class="text-blue-600">Add
+                                No instructors found. <a href="{{ route('admin.instructors.create') }}" class="text-blue-600">Add
                                     a
                                     instructor</a>
                             </td>

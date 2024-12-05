@@ -4,7 +4,7 @@
     <div class="container mx-auto px-8 py-6">
         <div class="flex justify-between items-center py-2 mb-6 shadow-md">
             <h1 class="text-3xl font-bold text-gray-800 px-4">Students Management</h1>
-            <a href="{{ route('students.create') }}"
+            <a href="{{ route('admin.students.create') }}"
                 class="bg-green-500 px-5 py-2 rounded-lg text-white shadow-lg hover:bg-green-700 transition-colors duration-300 flex items-center space-x-2">
                 <i class="ri-add-line text-lg"></i>
                 <span class="font-semibold">Add New Student</span>
@@ -53,15 +53,15 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-2">
-                                    <a href="{{ route('students.show', $student) }}"
+                                    <a href="{{ route('admin.students.show', $student) }}"
                                         class="text-blue-600 hover:text-blue-900 transition-colors">
                                         <i class="ri-eye-line text-lg"></i>
                                     </a>
-                                    <a href="{{ route('students.edit', $student->id) }}"
+                                    <a href="{{ route('admin.students.edit', $student->id) }}"
                                         class="text-yellow-600 hover:text-yellow-900 transition-colors">
                                         <i class="ri-edit-line text-lg"></i>
                                     </a>
-                                    <form action="{{ route('students.destroy', $student) }}" method="POST"
+                                    <form action="{{ route('admin.students.destroy', $student) }}" method="POST"
                                         class="inline-block"
                                         onsubmit="return confirm('Are you sure you want to delete this student?');">
                                         @csrf
@@ -77,7 +77,7 @@
                     @empty
                         <tr>
                             <td colspan="7" class="px-6 py-4 text-center text-gray-500">
-                                No students found. <a href="{{ route('students.create') }}" class="text-blue-600">Add a
+                                No students found. <a href="{{ route('admin.students.create') }}" class="text-blue-600">Add a
                                     student</a>
                             </td>
                         </tr>

@@ -16,12 +16,11 @@ class RedirectAdminIfAuthenticated
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // If the user is authenticated, redirect them to their respective dashboard
-        if (Auth::check()) {
-            // Redirect logged-in users (whether they are admins or normal users) to the dashboard
-            return redirect()->route('admin.dashboard'); // or any default route for logged-in users
+        if (Auth::guard('admin')->check()) {
+            // If already authenticated as a admin, redirect to the admin dashboard
+            return redirect()->route('admin.dashboard');
         }
 
-        return $next($request);
+        return redirect()->route('admin.login');
     }
 }

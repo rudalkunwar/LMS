@@ -4,7 +4,7 @@
     <div class="container mx-auto px-4 py-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-gray-800">Courses Management</h1>
-            <a href="{{ route('courses.create') }}" 
+            <a href="{{ route('admin.courses.create') }}" 
                class="bg-green-500 px-5 py-2 rounded-lg text-white shadow-lg hover:bg-green-700 transition-colors duration-300 flex items-center space-x-2">
                 <i class="ri-add-line text-lg"></i>
                 <span class="font-semibold">Add New Course</span>
@@ -48,15 +48,15 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-2">
-                                    <a href="{{ route('courses.show', $course) }}" 
+                                    <a href="{{ route('admin.courses.show', $course) }}" 
                                        class="text-blue-600 hover:text-blue-900 transition-colors">
                                         <i class="ri-eye-line text-lg"></i>
                                     </a>
-                                    <a href="{{ route('courses.edit', $course) }}" 
+                                    <a href="{{ route('admin.courses.edit', $course) }}" 
                                        class="text-yellow-600 hover:text-yellow-900 transition-colors">
                                         <i class="ri-edit-line text-lg"></i>
                                     </a>
-                                    <form action="{{ route('courses.destroy', $course) }}" 
+                                    <form action="{{ route('admin.courses.destroy', $course) }}" 
                                           method="POST" 
                                           class="inline-block"
                                           onsubmit="return confirm('Are you sure you want to delete this course?');">
@@ -73,7 +73,7 @@
                     @empty
                         <tr>
                             <td colspan="5" class="px-6 py-4 text-center text-gray-500">
-                                No courses found. <a href="{{ route('courses.create') }}" class="text-blue-600">Create your first course</a>
+                                No courses found. <a href="{{ route('admin.courses.create') }}" class="text-blue-600">Create your first course</a>
                             </td>
                         </tr>
                     @endforelse

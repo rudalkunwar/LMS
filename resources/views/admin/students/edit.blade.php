@@ -4,7 +4,7 @@
     <div class="container mx-auto px-8 py-6">
         <div class="flex justify-between items-center py-2 mb-4 pb-2 shadow-md">
             <h1 class="text-3xl font-bold text-gray-800 px-4">Edit Student</h1>
-            <a href="{{ route('students.index') }}"
+            <a href="{{ route('admin.students.index') }}"
                 class="bg-red-500 px-5 py-2 rounded-lg text-white shadow-lg hover:bg-red-700 transition-colors duration-300 flex items-center space-x-2">
                 <i class="ri-arrow-left-line text-lg"></i>
                 <span class="font-semibold">Back</span>
@@ -12,7 +12,7 @@
         </div>
 
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <form action="{{ route('students.update', $student->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.students.update', $student->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 

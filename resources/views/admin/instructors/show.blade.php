@@ -3,7 +3,7 @@
 @section('content')
     <div class="pl-8 shadow-md container mx-auto flex justify-between items-center py-4">
         <h1 class="text-3xl font-bold text-gray-800">View Instructor</h1>
-        <a href="{{ route('instructors.index') }}"
+        <a href="{{ route('admin.instructors.index') }}"
             class="bg-red-500 px-5 py-2 rounded-lg text-white shadow-lg hover:bg-red-700 transition-colors duration-300 flex items-center space-x-2">
             <i class="ri-arrow-left-line text-lg"></i>
             <span class="font-semibold">Back</span>
