@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('discussions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('student_id')->constrained();
             $table->string('title');
             $table->text('content');
-            $table->foreignId('parent_id')->nullable()->constrained('discussions');
             $table->timestamps();
         });
     }
