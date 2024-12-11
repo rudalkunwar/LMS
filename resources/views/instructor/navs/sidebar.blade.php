@@ -15,8 +15,8 @@
             <ul class="p-4 space-y-6">
                 <!-- Dashboard Section -->
                 <li>
-                    <a href="{{ route('admin.dashboard') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('instructor.dashboard') }}"
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/dashboard') ? 'active' : '' }}">
                         <i class="ri-dashboard-line w-5"></i>
                         <span class="text-md">Dashboard</span>
                     </a>
@@ -27,8 +27,8 @@
 
                 <!-- Students -->
                 <li>
-                    <a href="{{ route('admin.students.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/students') ? 'active' : '' }}">
+                    <a href="{{ route('instructor.students.index') }}"
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/students') ? 'active' : '' }}">
                         <i class="ri-user-line w-5"></i>
                         <span class="text-md">Students</span>
                     </a>
@@ -36,8 +36,8 @@
 
                 <!-- Courses -->
                 <li>
-                    <a href="{{ route('admin.courses.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/courses') ? 'active' : '' }}">
+                    <a href="{{ route('instructor.courses.index') }}"
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/courses') ? 'active' : '' }}">
                         <i class="ri-book-line w-5"></i>
                         <span class="text-md">Courses</span>
                     </a>
@@ -46,7 +46,7 @@
                 <!-- Assignments -->
                 <li>
                     <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/assignments') ? 'active' : '' }}">
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/assignments') ? 'active' : '' }}">
                         <i class="ri-file-list-line w-5"></i>
                         <span class="text-md">Assignments</span>
                     </a>
@@ -55,7 +55,7 @@
                 <!-- Grades -->
                 <li>
                     <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/grades') ? 'active' : '' }}">
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/grades') ? 'active' : '' }}">
                         <i class="ri-bar-chart-box-line w-5"></i>
                         <span class="text-md">Grades</span>
                     </a>
@@ -65,7 +65,7 @@
                 <!-- Reports -->
                 <li>
                     <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/reports') ? 'active' : '' }}">
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/reports') ? 'active' : '' }}">
                         <i class="ri-bar-chart-line w-5"></i>
                         <span class="text-md">Reports</span>
                     </a>

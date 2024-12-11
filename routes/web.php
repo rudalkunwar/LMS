@@ -98,9 +98,16 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
         Route::get('dashboard', [InstructorAuthenticationController::class, 'dashboard'])
             ->name('dashboard');
 
-        // Additional instructor-specific routes
+        // Additional instructor-specific routes instructor.students.index
         Route::get('assignment', [AssignmentController::class, 'courses'])
             ->name('assignments');
+
+        Route::get('students',[StudentController::class,'index'])->name('students.index');
+        Route::get('students/{student}',[StudentController::class,'show'])->name('students.show');
+
+        Route::get('courses',[CourseController::class,'instructorCourses'])->name('courses.index');
+        Route::get('courses/{course}',[CourseController::class,'show'])->name('courses.show');
+
         Route::get('profile', [InstructorController::class, 'profile'])
             ->name('profile');
     });

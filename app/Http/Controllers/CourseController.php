@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -118,5 +119,14 @@ class CourseController extends Controller
         // Redirect with success message
         return redirect()->route('admin.courses.index')
             ->with('success', 'Course deleted successfully.');
+    }
+
+
+
+    public function instructorCourses()
+    {
+        $instructor = Auth::user(); // Get the currently authenticated user
+        $courses = Course::where('instructor_id', $instructor->id)->get(); // Query courses by instructor ID
+        return view('instructor.courses.index', compact('courses')); // Pass courses to the view
     }
 }
