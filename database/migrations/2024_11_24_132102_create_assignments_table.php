@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->foreignId('instructor_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description');
             $table->datetime('due_date');
             $table->integer('total_marks');
+            $table->string('file_path')->nullable();
             $table->timestamps();
         });
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthenticationController;
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstructorAuthenticationController;
 use App\Http\Controllers\InstructorController;
@@ -98,8 +99,8 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
             ->name('dashboard');
 
         // Additional instructor-specific routes
-        Route::get('courses', [InstructorController::class, 'courses'])
-            ->name('courses');
+        Route::get('assignment', [AssignmentController::class, 'courses'])
+            ->name('assignments');
         Route::get('profile', [InstructorController::class, 'profile'])
             ->name('profile');
     });
