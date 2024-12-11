@@ -19,7 +19,7 @@ class Instructor extends Authenticatable
         'address',
         'dob',
         'course_id',
-        'password', 
+        'password',
     ];
 
     // Define the relationship with the Course model
@@ -37,5 +37,16 @@ class Instructor extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value); // Hash the password
+    }
+
+    // Relationship with Lessons
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
+    }
+    // Relationship with Courses
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
     }
 }
