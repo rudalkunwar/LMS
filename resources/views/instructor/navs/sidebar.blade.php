@@ -3,7 +3,7 @@
         <!-- Logo Section -->
         <div class="p-6 border-b border-gray-700">
             <div class="flex justify-between items-center">
-                <a href="">Learning Hub</a>
+                <a href="">Learning Hub | Instructor</a>
                 <button id="closeSidebar" class="md:hidden text-gray-400 hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>

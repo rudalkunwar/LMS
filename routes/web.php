@@ -102,7 +102,7 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
         Route::get('assignment', [AssignmentController::class, 'courses'])
             ->name('assignments');
 
-        Route::get('students',[StudentController::class,'index'])->name('students.index');
+        Route::get('students',[StudentController::class,'instructorStudents'])->name('students.index');
         Route::get('students/{student}',[StudentController::class,'show'])->name('students.show');
 
         Route::get('courses',[CourseController::class,'instructorCourses'])->name('courses.index');
@@ -111,6 +111,8 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
         Route::get('profile', [InstructorController::class, 'profile'])
             ->name('profile');
     });
+
+
 });
 
 // Optional: Catch-all route for 404

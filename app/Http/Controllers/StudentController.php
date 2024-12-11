@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
@@ -116,5 +117,12 @@ class StudentController extends Controller
     public function courses()
     {
         return view('student.courses.index');
+    }
+
+    public function instructorStudents()
+    {
+        $instructor = Auth::user(); // Get the authenticated instructor
+        $students = $instructor->students; // Fetch all students through the relationship
+        return view('instructor.students.index', compact('students'));
     }
 }
