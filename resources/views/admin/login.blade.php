@@ -9,7 +9,8 @@
                     @csrf <!-- Assuming you are using Laravel's CSRF protection -->
                     <!-- Heading -->
                     <div class="mb-6">
-                        <h3 class="text-gray-800 text-3xl font-extrabold">Sign in</h3>
+                    <h3>Admin</h3>
+                        <h3 class="text-gray-800 text-3xl font-extrabold"> Sign in</h3>
                     </div>
 
                     <!-- Heading -->

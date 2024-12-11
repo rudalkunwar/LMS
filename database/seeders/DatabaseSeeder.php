@@ -34,29 +34,6 @@ class DatabaseSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-        Student::factory()->create([
-            'name' => 'Student',
-            'email' => 'student@example.com',
-            'phone_number' => '1234567890',
-            'address' => '123 Elm Street, Springfield',
-            'dob' => '2000-01-01',
-            'photo' => 'default.png',
-            'course_id' => 1, // Replace with a valid course_id
-            'password' => Hash::make('11111111'),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        Instructor::factory()->create([
-            'name' => 'Instructor',
-            'email' => 'instructor@example.com',
-            'phone_number' => '1234567890',
-            'photo' => 'john_doe.jpg', // Example path to an image
-            'course_id' => 1, // Ensure this matches an existing `id` in the `courses` table
-            'password' => Hash::make('11111111'), // Securely hash passwords
-            'remember_token' => null,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+       
     }
 }

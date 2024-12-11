@@ -1,9 +1,9 @@
-<aside id="sidebar" class="fixed md:static w-72 h-screen bg-gray-900 text-white z-30">
+<aside id="sidebar" class="fixed md:static w-72 h-screen bg-cyan-900 text-white z-30">
     <div class="flex flex-col h-full">
         <!-- Logo Section -->
         <div class="p-6 border-b border-gray-700">
             <div class="flex justify-between items-center">
-                <a href="">Learning Hub</a>
+                <a href="">Learning Hub - Instructor</a>
                 <button id="closeSidebar" class="md:hidden text-gray-400 hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
@@ -15,7 +15,7 @@
             <ul class="p-4 space-y-6">
                 <!-- Dashboard Section -->
                 <li>
-                    <a href="{{ route('admin.dashboard') }}"
+                    <a href="{{ route('instructor.dashboard') }}"
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/dashboard') ? 'active' : '' }}">
                         <i class="ri-dashboard-line w-5"></i>
                         <span class="text-md">Dashboard</span>
