@@ -38,8 +38,8 @@ class Course extends Model
         return $this->hasMany(Discussion::class);
     }
 
-    public function students()
+    public function student()
     {
-        return $this->belongsToMany(User::class, 'course_user')->withTimestamps();
+        return $this->belongsToMany(Student::class);
     }
 }

@@ -103,10 +103,10 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
             ->name('assignments');
 
         Route::get('students',[StudentController::class,'instructorStudents'])->name('students.index');
-        Route::get('students/{student}',[StudentController::class,'show'])->name('students.show');
+        Route::get('students/{student}',[StudentController::class,'instructorStudentsShow'])->name('students.show');
 
         Route::get('courses',[CourseController::class,'instructorCourses'])->name('courses.index');
-        Route::get('courses/{course}',[CourseController::class,'show'])->name('courses.show');
+        Route::get('courses/{course}',[CourseController::class,'instructorCoursesShow'])->name('courses.show');
 
         Route::get('profile', [InstructorController::class, 'profile'])
             ->name('profile');

@@ -126,7 +126,11 @@ class CourseController extends Controller
     public function instructorCourses()
     {
         $instructor = Auth::user(); // Get the currently authenticated user
-        $courses = Course::where('instructor_id', $instructor->id)->get(); // Query courses by instructor ID
-        return view('instructor.courses.index', compact('courses')); // Pass courses to the view
+        $course = $instructor->course; // Query courses by instructor ID
+        return view('instructor.courses.index', compact('course')); // Pass courses to the view
+    }
+    public function instructorCoursesShow()
+    {
+        return view('instructor.courses.show', compact('course'));
     }
 }

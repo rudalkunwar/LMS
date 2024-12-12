@@ -122,7 +122,12 @@ class StudentController extends Controller
     public function instructorStudents()
     {
         $instructor = Auth::user(); // Get the authenticated instructor
-        $students = $instructor->students; // Fetch all students through the relationship
+        $course = $instructor->course;
+        $students = Student::where('course_id', $course->id)->get();
         return view('instructor.students.index', compact('students'));
+    }
+    public function instructorStudentsShow(Student $student)
+    {
+        return view('instructor.students.show', compact('student'));
     }
 }
