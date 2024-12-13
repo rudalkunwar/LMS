@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
+use App\Models\Course;
+use App\Models\Instructor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AssignmentController extends Controller
@@ -13,7 +16,11 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        $assignments = Assignment::latest()->paginate(10);
+        // Fetch assignments for the logged-in instructor with eager loading to optimize query
+        $assignments = Assignment::where('instructor_id', Auth::id())
+            ->latest()
+            ->paginate(10);
+
         return view('instructor.assignments.index', compact('assignments'));
     }
 
@@ -22,7 +29,9 @@ class AssignmentController extends Controller
      */
     public function create()
     {
-        return view('instructor.assignments.create');
+        $instructor = Instructor::find(Auth::id());
+        $course = $instructor->course; // Get courses taught by the logged-in instructor
+        return view('instructor.assignments.create', compact('course'));
     }
 
     /**
@@ -30,27 +39,35 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request
-        $validatedData = $request->validate([
-            'code' => 'required|unique:assignments,code|max:50',
-            'title' => 'required|max:255',
-            'description' => 'required',
-            'thumbnail' => 'nullable|image|max:2048', // Optional image, max 2MB
-            'status' => 'required|in:active,inactive'
+        // Validate request data
+        $validated = $request->validate([
+            'course_id' => 'required|exists:courses,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'due_date' => 'required|date|after:today', // Ensure due date is in the future
+            'total_marks' => 'required|integer|min:1', // Ensure positive marks
+            'file_path' => 'nullable|file|mimes:pdf,docx,doc|max:2048',
         ]);
 
         // Handle file upload
-        if ($request->hasFile('thumbnail')) {
-            $thumbnailPath = $request->file('thumbnail')->store('assignment_thumbnails', 'public');
-            $validatedData['thumbnail'] = $thumbnailPath;
+        $filePath = null;
+        if ($request->hasFile('file_path')) {
+            $filePath = $request->file('file_path')->store('assignments', 'public');
         }
 
-        // Create the assignment
-        $assignment = Assignment::create($validatedData);
+        // Create the assignment with additional data
+        $assignment = Assignment::create([
+            'course_id' => $validated['course_id'],
+            'instructor_id' => Auth::id(),
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'due_date' => $validated['due_date'],
+            'total_marks' => $validated['total_marks'],
+            'file_path' => $filePath
+        ]);
 
-        // Redirect with success message
         return redirect()->route('instructor.assignments.index')
-            ->with('success', 'assignment created successfully.');
+            ->with('success', 'Assignment created successfully!');
     }
 
     /**
@@ -66,7 +83,9 @@ class AssignmentController extends Controller
      */
     public function edit(Assignment $assignment)
     {
-        return view('instructor.assignments.edit', compact('assignment'));
+
+        $courses = Course::where('instructor_id', Auth::id())->get();
+        return view('instructor.assignments.edit', compact('assignment', 'courses'));
     }
 
     /**
@@ -74,49 +93,50 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
-        // Validate the request
-        $validatedData = $request->validate([
-            'code' => 'required|unique:assignments,code,' . $assignment->id . '|max:50',
-            'title' => 'required|max:255',
-            'description' => 'required',
-            'thumbnail' => 'nullable|image|max:2048', // Optional image, max 2MB
-            'status' => 'required|in:active,inactive'
+        $validated = $request->validate([
+            'course_id' => 'required|exists:courses,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'due_date' => 'required|date|after:today', // Ensure due date is in the future
+            'total_marks' => 'required|integer|min:1', // Ensure positive marks
+            'file_path' => 'nullable|file|mimes:pdf,docx,doc|max:2048',
         ]);
 
         // Handle file upload
-        if ($request->hasFile('thumbnail')) {
-            // Delete old thumbnail if exists
-            if ($assignment->thumbnail) {
-                Storage::disk('public')->delete($assignment->thumbnail);
+        if ($request->hasFile('file_path')) {
+            // Delete old file if exists
+            if ($assignment->file_path) {
+                Storage::disk('public')->delete($assignment->file_path);
             }
 
-            $thumbnailPath = $request->file('thumbnail')->store('assignment_thumbnails', 'public');
-            $validatedData['thumbnail'] = $thumbnailPath;
+            // Store new file
+            $validated['file_path'] = $request->file('file_path')->store('assignments', 'public');
+        } else {
+            // Keep existing file path if no new file is uploaded
+            $validated['file_path'] = $assignment->file_path;
         }
 
         // Update the assignment
-        $assignment->update($validatedData);
+        $assignment->update($validated);
 
-        // Redirect with success message
         return redirect()->route('instructor.assignments.index')
-            ->with('success', 'assignment updated successfully.');
+            ->with('success', 'Assignment updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(assignment $assignment)
+    public function destroy(Assignment $assignment)
     {
-        // Delete thumbnail if exists
-        if ($assignment->thumbnail) {
-            Storage::disk('public')->delete($assignment->thumbnail);
+        // Delete file if exists
+        if ($assignment->file_path) {
+            Storage::disk('public')->delete($assignment->file_path);
         }
 
         // Delete the assignment
         $assignment->delete();
 
-        // Redirect with success message
         return redirect()->route('instructor.assignments.index')
-            ->with('success', 'assignment deleted successfully.');
+            ->with('success', 'Assignment deleted successfully!');
     }
 }

@@ -1,5 +1,7 @@
 @extends('instructor.layouts.app')
-
+@push('title')
+    Course Details
+@endpush
 @section('content')
     <div class="container mx-auto">
         <div class="flex justify-between items-center border-b-2">

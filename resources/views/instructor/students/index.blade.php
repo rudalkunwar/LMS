@@ -1,4 +1,7 @@
 @extends('instructor.layouts.app')
+@push('title')
+    Students
+@endpush
 @section('content')
     <div class="border-b border-b-black">
         <h2 class="text-3xl py-2 font-bold">My Students</h2>

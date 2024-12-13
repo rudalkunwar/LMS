@@ -28,7 +28,7 @@
                 <!-- Students -->
                 <li>
                     <a href="{{ route('instructor.students.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/students') ? 'active' : '' }}">
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/students*') ? 'active' : '' }}">
                         <i class="ri-user-line w-5"></i>
                         <span class="text-md">Students</span>
                     </a>
@@ -37,7 +37,7 @@
                 <!-- Courses -->
                 <li>
                     <a href="{{ route('instructor.courses.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/courses') ? 'active' : '' }}">
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/courses*') ? 'active' : '' }}">
                         <i class="ri-book-line w-5"></i>
                         <span class="text-md">Courses</span>
                     </a>
@@ -45,8 +45,8 @@
 
                 <!-- Assignments -->
                 <li>
-                    <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/assignments') ? 'active' : '' }}">
+                    <a href="{{ route('instructor.assignments.index') }}"
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/assignments*') ? 'active' : '' }}">
                         <i class="ri-file-list-line w-5"></i>
                         <span class="text-md">Assignments</span>
                     </a>

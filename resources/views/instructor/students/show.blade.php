@@ -1,5 +1,7 @@
 @extends('instructor.layouts.app')
-
+@push('title')
+    Student Details
+@endpush
 @section('content')
     <div class="pl-8 shadow-md container mx-auto flex justify-between items-center py-4">
         <h1 class="text-3xl font-bold text-gray-800">View Student</h1>
@@ -41,7 +43,6 @@
                     <div class="p-6">
                         <h3 class="text-lg font-semibold text-gray-700 mb-4">Student Photo</h3>
                         @if ($student->photo)
-
                             <div class="mb-4">
                                 <img src="{{ Storage::url($student->photo) }}" alt="{{ $student->title }} photo"
                                     class="w-full h-64 object-cover rounded-lg shadow-md">

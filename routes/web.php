@@ -98,21 +98,18 @@ Route::prefix('instructor')->name('instructor.')->group(function () {
         Route::get('dashboard', [InstructorAuthenticationController::class, 'dashboard'])
             ->name('dashboard');
 
-        // Additional instructor-specific routes instructor.students.index
-        Route::get('assignment', [AssignmentController::class, 'courses'])
-            ->name('assignments');
+        Route::get('students', [StudentController::class, 'instructorStudents'])->name('students.index');
+        Route::get('students/{student}', [StudentController::class, 'instructorStudentsShow'])->name('students.show');
 
-        Route::get('students',[StudentController::class,'instructorStudents'])->name('students.index');
-        Route::get('students/{student}',[StudentController::class,'instructorStudentsShow'])->name('students.show');
+        Route::get('courses', [CourseController::class, 'instructorCourses'])->name('courses.index');
+        Route::get('courses/{course}', [CourseController::class, 'instructorCoursesShow'])->name('courses.show');
 
-        Route::get('courses',[CourseController::class,'instructorCourses'])->name('courses.index');
-        Route::get('courses/{course}',[CourseController::class,'instructorCoursesShow'])->name('courses.show');
+         // Additional instructor-specific routes instructor.students.index
+         Route::resources(['assignments' => AssignmentController::class]);
 
         Route::get('profile', [InstructorController::class, 'profile'])
             ->name('profile');
     });
-
-
 });
 
 // Optional: Catch-all route for 404
