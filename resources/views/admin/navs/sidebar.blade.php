@@ -25,30 +25,21 @@
                 <!-- College Management Section -->
                 <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">College Management</li>
 
-                <!-- Instructors -->
-                <li>
-                    <a href="{{ route('admin.instructors.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/instructors') ? 'active' : '' }}">
-                        <i class="ri-user-star-line w-5"></i>
-                        <span class="text-md">Instructors</span>
-                    </a>
-                </li>
-
-                <!-- Students -->
-                <li>
-                    <a href="{{ route('admin.students.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/students') ? 'active' : '' }}">
-                        <i class="ri-user-line w-5"></i>
-                        <span class="text-md">Students</span>
-                    </a>
-                </li>
-
                 <!-- Courses -->
                 <li>
-                    <a href="{{route('admin.courses.index')}}"
+                    <a href="{{ route('admin.courses.index') }}"
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/courses') ? 'active' : '' }}">
                         <i class="ri-book-line w-5"></i>
                         <span class="text-md">Courses</span>
+                    </a>
+                </li>
+
+                <!-- Instructors -->
+                <li>
+                    <a href="{{ route('admin.users.index') }}"
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/instructors') ? 'active' : '' }}">
+                        <i class="ri-user-star-line w-5"></i>
+                        <span class="text-md">Users</span>
                     </a>
                 </li>
 

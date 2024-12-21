@@ -1,12 +1,5 @@
 @include('partials.header')
 <main>
-    <div class="pt-16 py-4 px-4 bg-black flex gap-8">
-        <a href="{{ route('admin.login') }}" class="bg-green-500 px-5 py-2 my-2 rounded-md text-white">Admin | Login</a>
-        <a href="{{ route('student.login') }}" class="bg-pink-500 px-5 py-2 my-2 rounded-md text-white">Student |
-            Login</a>
-        <a href="{{ route('instructor.login') }}" class="bg-yellow-500 px-5 py-2 my-2 rounded-md text-white">Instructor |
-            Login</a>
-    </div>
     <div class="relative pt-16 pb-32 flex content-center items-center justify-center" style="min-height: 75vh;">
         <div class="absolute top-0 w-full h-full bg-center bg-cover"
             style='background-image: url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1267&amp;q=80");'>

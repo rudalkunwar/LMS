@@ -1,118 +1,57 @@
 <?php
 
-use App\Http\Controllers\AdminAuthenticationController;
-use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\InstructorAuthenticationController;
-use App\Http\Controllers\InstructorController;
-use App\Http\Controllers\StudentAssignmentsController;
-use App\Http\Controllers\StudentAuthenticationController;
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Home Route
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+});
 
-// Admin Routes
+// Redirect users to the correct dashboard based on their role
+Route::get('/dashboard', function () {
+
+    $user = Auth::user();
+
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.dashboard');
+    } elseif ($user->role === 'instructor') {
+        return redirect()->route('instructor.dashboard');
+    } elseif ($user->role === 'student') {
+        return redirect()->route('student.dashboard');
+    }
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+// Admin Dashboard
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('admin.dashboard');
+
 Route::prefix('admin')->name('admin.')->group(function () {
-    // Guest routes (unauthenticated admins)
-    Route::middleware(['guest:admin'])->group(function () {
-        Route::get('login', [AdminAuthenticationController::class, 'showLoginForm'])
-            ->name('login');
-        Route::post('login', [AdminAuthenticationController::class, 'login'])
-            ->name('login.submit');
-    });
-
-    // Authenticated admin routes
-    Route::middleware(['auth:admin'])->group(function () {
-        Route::post('logout', [AdminAuthenticationController::class, 'logout'])
-            ->name('logout');
-        Route::get('dashboard', [AdminAuthenticationController::class, 'dashboard'])
-            ->name('dashboard');
-
-        // Resource Routes with additional custom routes
-        Route::resources([
-            'students' => StudentController::class,
-            'instructors' => InstructorController::class,
-            'courses' => CourseController::class
-        ]);
-
-        // Additional admin-specific routes can be added here
-        Route::get('profile', [AdminAuthenticationController::class, 'profile'])
-            ->name('profile');
-    });
+    // Admin-specific resources
+    Route::resources([
+        'users' => AdminUserController::class,
+        'courses' => CourseController::class
+    ]);
 });
 
-// Student Routes
-Route::prefix('student')->name('student.')->group(function () {
-    // Guest routes
-    Route::middleware(['guest:student'])->group(function () {
-        Route::get('login', [StudentAuthenticationController::class, 'showLoginForm'])
-            ->name('login');
-        Route::post('login', [StudentAuthenticationController::class, 'login'])
-            ->name('login.submit');
+// Student Dashboard
+Route::get('/student/dashboard', function () {
+    return view('student.dashboard');
+})->middleware(['auth', 'verified'])->name('student.dashboard');
 
-        // Registration route (optional)
-        Route::get('register', [StudentAuthenticationController::class, 'showRegistrationForm'])
-            ->name('register');
-        Route::post('register', [StudentAuthenticationController::class, 'register'])
-            ->name('register.submit');
-    });
+// Instructor Dashboard
+Route::get('/instructor/dashboard', function () {
+    return view('instructor.dashboard');
+})->middleware(['auth', 'verified'])->name('instructor.dashboard');
 
-    // Authenticated student routes
-    Route::middleware(['auth:student'])->group(function () {
-        Route::post('logout', [StudentAuthenticationController::class, 'logout'])
-            ->name('logout');
-        Route::get('dashboard', [StudentAuthenticationController::class, 'dashboard'])
-            ->name('dashboard');
-
-        // Additional student-specific routes
-        Route::get('courses', [StudentController::class, 'courses'])
-            ->name('courses');
-
-        Route::resources([
-            'assignments' => StudentAssignmentsController::class,
-
-        ]);
-        Route::get('profile', [StudentController::class, 'profile'])
-            ->name('profile');
-    });
+// Profile routes
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Instructor Routes
-Route::prefix('instructor')->name('instructor.')->group(function () {
-    // Guest routes
-    Route::middleware(['guest:instructor'])->group(function () {
-        Route::get('login', [InstructorAuthenticationController::class, 'showLoginForm'])
-            ->name('login');
-        Route::post('login', [InstructorAuthenticationController::class, 'login'])
-            ->name('login.submit');
-    });
-
-    // Authenticated instructor routes
-    Route::middleware(['auth:instructor'])->group(function () {
-        Route::post('logout', [InstructorAuthenticationController::class, 'logout'])
-            ->name('logout');
-        Route::get('dashboard', [InstructorAuthenticationController::class, 'dashboard'])
-            ->name('dashboard');
-
-        Route::get('students', [StudentController::class, 'instructorStudents'])->name('students.index');
-        Route::get('students/{student}', [StudentController::class, 'instructorStudentsShow'])->name('students.show');
-
-        Route::get('courses', [CourseController::class, 'instructorCourses'])->name('courses.index');
-        Route::get('courses/{course}', [CourseController::class, 'instructorCoursesShow'])->name('courses.show');
-
-         // Additional instructor-specific routes instructor.students.index
-         Route::resources(['assignments' => AssignmentController::class]);
-
-        Route::get('profile', [InstructorController::class, 'profile'])
-            ->name('profile');
-    });
-});
-
-// Optional: Catch-all route for 404
-Route::fallback(function () {
-    return view('errors.404');
-});
+require __DIR__ . '/auth.php';

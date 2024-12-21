@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
 use App\Models\Course;
-use App\Models\Instructor;
-use App\Models\Student;
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -19,44 +17,117 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        Admin::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('11111111'),
+        // Creating the admin user
+        User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'phone_number' => null,  // Optional field, can be left as null
+            'address' => null,       // Optional field, can be left as null
+            'dob' => null,           // Optional field, can be left as null
+            'photo' => null,         // Optional field, can be left as null
+            'role' => 'admin',       // Setting the role as 'admin'
+            'is_active' => true,     // User is active by default
+            'email_verified_at' => now(),  // Email is verified by default
+            'password' => Hash::make('11111111'),  // Securely hashed password
         ]);
 
-        Course::factory()->create([
-            'code' => 'CSE101',
-            'title' => 'Introduction to Computer Science',
-            'description' => 'A foundational course in computer science.',
-            'thumbnail' => 'cse101.jpg', // Example path to an image
-            'status' => 'active',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        Student::factory()->create([
-            'name' => 'Student',
+        // Creating the student user
+        User::create([
+            'name' => 'Student User',
             'email' => 'student@example.com',
-            'phone_number' => '1234567890',
-            'address' => '123 Elm Street, Springfield',
-            'dob' => '2000-01-01',
-            'photo' => 'default.png',
-            'course_id' => 1, // Replace with a valid course_id
-            'password' => Hash::make('11111111'),
-            'created_at' => now(),
-            'updated_at' => now(),
+            'phone_number' => null,  // Optional field, can be left as null
+            'address' => null,       // Optional field, can be left as null
+            'dob' => null,           // Optional field, can be left as null
+            'photo' => null,         // Optional field, can be left as null
+            'role' => 'student',     // Setting the role as 'student'
+            'is_active' => true,     // User is active by default
+            'email_verified_at' => now(),  // Email is verified by default
+            'password' => Hash::make('11111111'),  // Securely hashed password
         ]);
 
-        Instructor::factory()->create([
-            'name' => 'Instructor',
+        // Creating the instructor user
+        User::create([
+            'name' => 'Instructor User',
             'email' => 'instructor@example.com',
-            'phone_number' => '1234567890',
-            'photo' => 'john_doe.jpg', // Example path to an image
-            'course_id' => 1, // Ensure this matches an existing `id` in the `courses` table
-            'password' => Hash::make('11111111'), // Securely hash passwords
-            'remember_token' => null,
-            'created_at' => now(),
-            'updated_at' => now(),
+            'phone_number' => null,  // Optional field, can be left as null
+            'address' => null,       // Optional field, can be left as null
+            'dob' => null,           // Optional field, can be left as null
+            'photo' => null,         // Optional field, can be left as null
+            'role' => 'instructor',  // Setting the role as 'instructor'
+            'is_active' => true,     // User is active by default
+            'email_verified_at' => now(),  // Email is verified by default
+            'password' => Hash::make('11111111'),  // Securely hashed password
         ]);
+
+        // Sample courses data
+        $courses = [
+            [
+                'code' => 'CS101',
+                'title' => 'Introduction to Programming',
+                'description' => 'A beginner course in programming fundamentals',
+                'thumbnail' => 'https://via.placeholder.com/150',
+                'status' => 'active',
+            ],
+            [
+                'code' => 'WD200',
+                'title' => 'Web Development Basics',
+                'description' => 'Learn HTML, CSS, and JavaScript for web development',
+                'thumbnail' => 'https://via.placeholder.com/150',
+                'status' => 'active',
+            ],
+            [
+                'code' => 'JS300',
+                'title' => 'Advanced JavaScript',
+                'description' => 'Deep dive into JavaScript concepts and frameworks',
+                'thumbnail' => 'https://via.placeholder.com/150',
+                'status' => 'inactive',
+            ],
+            [
+                'code' => 'DB400',
+                'title' => 'Database Management Systems',
+                'description' => 'Learn how to design, implement, and manage databases',
+                'thumbnail' => 'https://via.placeholder.com/150',
+                'status' => 'active',
+            ],
+            [
+                'code' => 'REACT500',
+                'title' => 'React for Frontend Development',
+                'description' => 'Build dynamic web applications with React',
+                'thumbnail' => 'https://via.placeholder.com/150',
+                'status' => 'active',
+            ],
+            [
+                'code' => 'PHP600',
+                'title' => 'PHP and Laravel',
+                'description' => 'Master backend web development using PHP and Laravel framework',
+                'thumbnail' => 'https://via.placeholder.com/150',
+                'status' => 'inactive',
+            ],
+            [
+                'code' => 'MOBILE700',
+                'title' => 'Mobile App Development',
+                'description' => 'Learn to build mobile applications for iOS and Android',
+                'thumbnail' => 'https://via.placeholder.com/150',
+                'status' => 'active',
+            ],
+            [
+                'code' => 'DSA800',
+                'title' => 'Data Structures and Algorithms',
+                'description' => 'Understand essential data structures and algorithms',
+                'thumbnail' => 'https://via.placeholder.com/150',
+                'status' => 'active',
+            ],
+        ];
+
+        // Insert sample data into the courses table
+        foreach ($courses as $course) {
+            Course::create([
+                'code' => $course['code'],
+                'title' => $course['title'],
+                'description' => $course['description'],
+                'thumbnail' => $course['thumbnail'],
+                'status' => $course['status'],
+            ]);
+        }
     }
 }

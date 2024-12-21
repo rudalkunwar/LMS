@@ -1,4 +1,4 @@
-@extends('instructor.layouts.app')
+@extends('layouts.app')
 @section('content')
-    <h2>Instructor Dashboard</h2>
+    <div>This is Dashboard</div>
 @endsection

@@ -1,7 +1,4 @@
-@extends('student.layouts.app')
-@push('title')
-    Student-Dashboard
-@endpush
+@extends('layouts.app')
 @section('content')
-    <h2>Student Dashboard</h2>
+    <div>This is Dashboard</div>
 @endsection

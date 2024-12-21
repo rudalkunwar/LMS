@@ -8,6 +8,7 @@
     <meta name="theme-color" content="#000000" />
     <link rel="shortcut icon" href="./assets/img/favicon.ico" />
     <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <title>Learning Hub | Header</title>
 </head>
 
@@ -42,7 +43,7 @@
             </div>
             <!-- Action Button -->
             <div class="hidden lg:block">
-                <a href="{{ route('admin.login') }}"
+                <a href="{{ route('login') }}"
                     class="bg-blue-500 text-white px-4 py-2 rounded-md text-sm uppercase font-medium shadow hover:bg-blue-600 transition duration-200">
                     Login
                 </a>

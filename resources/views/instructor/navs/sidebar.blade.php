@@ -1,4 +1,4 @@
-<aside id="sidebar" class="fixed md:static w-72 h-screen bg-gray-900 text-white z-30">
+<aside id="sidebar" class="fixed md:static w-72 h-screen bg-pink-900 text-white z-30">
     <div class="flex flex-col h-full">
         <!-- Logo Section -->
         <div class="p-6 border-b border-gray-700">
@@ -15,29 +15,20 @@
             <ul class="p-4 space-y-6">
                 <!-- Dashboard Section -->
                 <li>
-                    <a href="{{ route('instructor.dashboard') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/dashboard') ? 'active' : '' }}">
+                    <a href=""
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/dashboard') ? 'active' : '' }}">
                         <i class="ri-dashboard-line w-5"></i>
                         <span class="text-md">Dashboard</span>
                     </a>
                 </li>
 
                 <!-- College Management Section -->
-                <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">College Management</li>
-
-                <!-- Students -->
-                <li>
-                    <a href="{{ route('instructor.students.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/students*') ? 'active' : '' }}">
-                        <i class="ri-user-line w-5"></i>
-                        <span class="text-md">Students</span>
-                    </a>
-                </li>
+                <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">Activity</li>
 
                 <!-- Courses -->
                 <li>
-                    <a href="{{ route('instructor.courses.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/courses*') ? 'active' : '' }}">
+                    <a href=""
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/courses') ? 'active' : '' }}">
                         <i class="ri-book-line w-5"></i>
                         <span class="text-md">Courses</span>
                     </a>
@@ -45,8 +36,8 @@
 
                 <!-- Assignments -->
                 <li>
-                    <a href="{{ route('instructor.assignments.index') }}"
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/assignments*') ? 'active' : '' }}">
+                    <a href=""
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/assignments') ? 'active' : '' }}">
                         <i class="ri-file-list-line w-5"></i>
                         <span class="text-md">Assignments</span>
                     </a>
@@ -55,17 +46,18 @@
                 <!-- Grades -->
                 <li>
                     <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/grades') ? 'active' : '' }}">
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/grades') ? 'active' : '' }}">
                         <i class="ri-bar-chart-box-line w-5"></i>
                         <span class="text-md">Grades</span>
                     </a>
                 </li>
-                <!-- College Management Section -->
+
+                <!-- System Management Section -->
                 <li class="text-sm font-semibold text-gray-700 dark:text-gray-300">Others</li>
                 <!-- Reports -->
                 <li>
                     <a href=""
-                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('instructor/reports') ? 'active' : '' }}">
+                        class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/reports') ? 'active' : '' }}">
                         <i class="ri-bar-chart-line w-5"></i>
                         <span class="text-md">Reports</span>
                     </a>

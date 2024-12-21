@@ -15,7 +15,7 @@
             <ul class="p-4 space-y-6">
                 <!-- Dashboard Section -->
                 <li>
-                    <a href="{{ route('student.dashboard') }}"
+                    <a href=""
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/dashboard') ? 'active' : '' }}">
                         <i class="ri-dashboard-line w-5"></i>
                         <span class="text-md">Dashboard</span>
@@ -27,7 +27,7 @@
 
                 <!-- Courses -->
                 <li>
-                    <a href="{{ route('student.courses') }}"
+                    <a href=""
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/courses') ? 'active' : '' }}">
                         <i class="ri-book-line w-5"></i>
                         <span class="text-md">Courses</span>
@@ -36,7 +36,7 @@
 
                 <!-- Assignments -->
                 <li>
-                    <a href="{{route('student.assignments.index')}}"
+                    <a href=""
                         class="nav-link flex items-center gap-3 text-sm px-4 py-3 rounded-lg hover:bg-sky-600 transition-colors {{ Request::is('admin/assignments') ? 'active' : '' }}">
                         <i class="ri-file-list-line w-5"></i>
                         <span class="text-md">Assignments</span>

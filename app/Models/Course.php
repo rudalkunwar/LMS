@@ -17,29 +17,8 @@ class Course extends Model
         'thumbnail',
         'status'
     ];
-
-    public function instructor()
+    public function users()
     {
-        return $this->belongsTo(User::class, 'instructor_id');
-    }
-
-    public function lessons()
-    {
-        return $this->hasMany(Lesson::class)->orderBy('order');
-    }
-
-    public function assignments()
-    {
-        return $this->hasMany(Assignment::class);
-    }
-
-    public function discussions()
-    {
-        return $this->hasMany(Discussion::class);
-    }
-
-    public function student()
-    {
-        return $this->belongsToMany(Student::class);
+        return $this->belongsToMany(User::class, 'course_user');
     }
 }
